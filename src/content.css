@@ -1,0 +1,17 @@
+.react-extension {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: rgba(0,0,0,.4);
+}
+
+.react-extension p {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}

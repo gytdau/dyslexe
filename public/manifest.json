@@ -7,6 +7,21 @@
     "default_popup": "index.html",
     "default_title": "Open the popup"
   },
-  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "css": [
+        "/static/css/content.css"
+      ],
+      "js": [
+        "/static/js/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://*/*"
+  ],
   "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
 }
