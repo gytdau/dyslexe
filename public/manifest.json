@@ -3,9 +3,13 @@
   "name": "My Extension",
   "description": "This extension is a starting point to create a real Chrome extension",
   "version": "0.0.1",
+  "background": {
+    "scripts": [
+      "/static/js/background.js"
+    ]
+  },
   "browser_action": {
-    "default_popup": "index.html",
-    "default_title": "Open the popup"
+    "default_icon": "favicon.ico"
   },
   "content_scripts": [
     {
@@ -15,16 +19,11 @@
       "css": [
         "/static/css/app.css",
         "/static/css/content.css"
-      ],
-      "js": [
-        "/static/js/0.js",
-        "/static/js/content.js"
       ]
     }
   ],
   "permissions": [
     "https://*/*",
-    "https://reactjs.org/*",
     "activeTab"
   ]
 }
