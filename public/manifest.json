@@ -10,12 +10,14 @@
   "content_scripts": [
     {
       "matches": [
-        "https://reactjs.org/*"
+        "<all_urls>"
       ],
       "css": [
+        "/static/css/app.css",
         "/static/css/content.css"
       ],
       "js": [
+        "/static/js/0.js",
         "/static/js/content.js"
       ]
     }
