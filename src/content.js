@@ -14,5 +14,5 @@ class ContentReact extends React.Component {
 }
 
 const app = document.createElement('div');
-document.body.appendChild(app);
+document.getElementsByTagName('body')[0].appendChild(app);
 ReactDOM.render(<ContentReact />, app);
