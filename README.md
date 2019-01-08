@@ -4,4 +4,4 @@ Bootstrapped with Create React App, and uses [this guide](https://veerasundar.co
 
 ## Building
 
-Chrome doesn't appear to update the content injection scripts when you press the Update button. Try removing it and adding the directory again.
+`yarn build` and then add the `build` folder as an unpacked extension in Chrome. Happy experimenting!

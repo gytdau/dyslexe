@@ -203,7 +203,7 @@ module.exports = {
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+    runtimeChunk: false,
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
