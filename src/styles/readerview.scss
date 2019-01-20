@@ -1,0 +1,221 @@
+.dyslexi-page {
+  display: block !important;
+  background-color: #fff;
+  font-family: "Arial";
+  width: 600px;
+  margin: auto;
+}
+
+pre {
+  overflow-y: scroll;
+}
+// Following classes taken and adapted from Firefox's reader mode:
+
+/*======= Article content =======*/
+
+/* Note that any class names from the original article that we want to match on
+ * must be added to CLASSES_TO_PRESERVE in ReaderMode.jsm, so that
+ * Readability.js doesn't strip them out */
+
+ .dyslexi-page {
+  font-size: 1em;
+  line-height: 1.6em;
+  margin-top: 5em;
+  margin-bottom: 20vh;
+}
+
+.dyslexi-page.line-height1 {
+  line-height: 1em;
+}
+
+.dyslexi-page.line-height2 {
+  line-height: 1.2em;
+}
+
+.dyslexi-page.line-height3 {
+  line-height: 1.4em;
+}
+
+.dyslexi-page.line-height4 {
+  line-height: 1.6em;
+}
+
+.dyslexi-page.line-height5 {
+  line-height: 1.8em;
+}
+
+.dyslexi-page.line-height6 {
+  line-height: 2.0em;
+}
+
+.dyslexi-page.line-height7 {
+  line-height: 2.2em;
+}
+
+.dyslexi-page.line-height8 {
+  line-height: 2.4em;
+}
+
+.dyslexi-page.line-height9 {
+  line-height: 2.6em;
+}
+
+@media print {
+  .dyslexi-page p,
+  .dyslexi-page code,
+  .dyslexi-page pre,
+  .dyslexi-page blockquote,
+  .dyslexi-page ul,
+  .dyslexi-page ol,
+  .dyslexi-page li,
+  .dyslexi-page figure,
+  .dyslexi-page .wp-caption {
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+  }
+}
+
+.dyslexi-page h1,
+.dyslexi-page h2,
+.dyslexi-page h3 {
+  font-weight: bold;
+}
+
+.dyslexi-page h1 {
+  font-size: 1.6em;
+  line-height: 1.25em;
+}
+
+.dyslexi-page h2 {
+  font-size: 1.2em;
+  line-height: 1.51em;
+}
+
+.dyslexi-page h3 {
+  font-size: 1em;
+  line-height: 1.66em;
+}
+
+.dyslexi-page a:link {
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.dyslexi-page a:link,
+.dyslexi-page a:link:hover,
+.dyslexi-page a:link:active {
+  color: #0095dd;
+}
+
+.dyslexi-page a:visited {
+  color: #c2e;
+}
+
+.dyslexi-page * {
+  max-width: 100%;
+  height: auto;
+}
+
+.dyslexi-page p,
+.dyslexi-page p,
+.dyslexi-page code,
+.dyslexi-page pre,
+.dyslexi-page blockquote,
+.dyslexi-page ul,
+.dyslexi-page ol,
+.dyslexi-page li,
+.dyslexi-page figure,
+.dyslexi-page .wp-caption {
+  margin: -10px -10px 20px -10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dyslexi-page li {
+  margin-bottom: 0;
+}
+
+.dyslexi-page li > ul,
+.dyslexi-page li > ol {
+  margin-bottom: -10px;
+}
+
+.dyslexi-page p > img:only-child,
+.dyslexi-page p > a:only-child > img:only-child,
+.dyslexi-page .wp-caption img,
+.dyslexi-page figure img {
+  display: block;
+}
+
+.dyslexi-page img[moz-reader-center] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dyslexi-page .caption,
+.dyslexi-page .wp-caption-text
+.dyslexi-page figcaption {
+  font-size: 0.9em;
+  line-height: 1.48em;
+  font-style: italic;
+}
+
+.dyslexi-page code,
+.dyslexi-page pre {
+  white-space: pre-wrap;
+}
+
+.dyslexi-page blockquote {
+  padding: 0;
+  padding-inline-start: 16px;
+}
+
+.dyslexi-page ul,
+.dyslexi-page ol {
+  padding: 0;
+}
+
+.dyslexi-page ul {
+  padding-inline-start: 30px;
+  list-style: disc;
+}
+
+.dyslexi-page ol {
+  padding-inline-start: 30px;
+  list-style: decimal;
+}
+
+/* Visually hide (but don't display: none) screen reader elements */
+.dyslexi-page .visually-hidden,
+.dyslexi-page .visuallyhidden,
+.dyslexi-page .sr-only {
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  border-width: 0;
+}
+
+/* Hide elements with common "hidden" class names */
+.dyslexi-page .hidden,
+.dyslexi-page .invisible {
+  display: none;
+}
+
+/* Enforce wordpress and similar emoji/smileys aren't sized to be full-width,
+ * see bug 1399616 for context. */
+.dyslexi-page img.wp-smiley,
+.dyslexi-page img.emoji {
+  display: inline-block;
+  border-width: 0;
+  /* height: auto is implied from `.dyslexi-page *` rule. */
+  width: 1em;
+  margin: 0 .07em;
+  padding: 0;
+}
+
+.reader-show-element {
+  display: initial;
+}

@@ -17,7 +17,6 @@
         "<all_urls>"
       ],
       "css": [
-        "/static/css/app.css",
         "/static/css/content.css"
       ]
     }
