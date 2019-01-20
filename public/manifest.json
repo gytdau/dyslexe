@@ -17,7 +17,8 @@
         "<all_urls>"
       ],
       "css": [
-        "/static/css/content.css"
+        "/static/css/content.css",
+        "/static/css/2.css"
       ]
     }
   ],

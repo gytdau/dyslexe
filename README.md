@@ -4,7 +4,7 @@ This extension makes reading articles easier for those who have dyslexia or othe
 
 # Contributing
 
-We're running on React. You can check out the React components under `src/components` and the styles we use under `src/styles`.
+We're running on React. You can check out the React components under `src/components` and the styles we use under `src/styles`. The app is loaded in at `src/content.js`, so you can follow the files from there to figure out where everything is.
 
 Bootstrapped with Create React App, and uses [this guide](https://veerasundar.com/blog/2018/05/how-to-create-a-chrome-extension-in-react-js/) and [that guide](https://medium.com/@gilfink/building-a-chrome-extension-using-react-c5bfe45aaf36) to make things work. You don't have to read these, they're just for reference.
 
