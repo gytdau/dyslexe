@@ -12,9 +12,7 @@ Bootstrapped with Create React App, and uses [this guide](https://veerasundar.co
 
 Whenever you make a change, you'll have to rebuild the extension so that the changes you made are compiled down into the extension. Run `yarn build` to generate a `build` folder. Then, add the `build` folder as an unpacked extension in the Chrome extensions page. You should see the extension on your toolbar. Remember to rebuild after you make changes. Happy experimenting!
 
-## Issues
-
-- I have no idea what the numbers correspond to in /public/static/js/background.js
+Try running `yarn build-fast` to make a development version. Not sure how fast it is - it might be slower - but you take what you can get in this life.
 
 ## Contributing
 

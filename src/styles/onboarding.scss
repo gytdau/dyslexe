@@ -5,3 +5,36 @@
   width: 600px;
   margin: auto;
 }
+
+.btn-primary {
+  display: block;
+  width: 10em;
+  text-align: left;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.5em 2em;
+  border-radius: 100px;
+  background: transparent;
+  border-width: 2px;
+  color: #333;
+  border-color: #333;
+}
+
+.letter-input {
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  .form-control {
+    width: 3em;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.3rem;
+  }
+  .btn {
+    font-size: 1.3rem;
+  }
+  .mdi {
+    font-size: 2rem;
+    margin: 10px;
+  }
+}

@@ -1,6 +1,19 @@
-@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,800');
+@import 'colors';
+@import 'firasans';
+@import 'onboarding';
 
+* {
+  font-family: "Fira Sans";
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+}
+p {
+  font-size: 1.3em;
+}
+.size-normal {
+  font-size: 1.3rem;
+}
 .dyslexi-viewer {
   display: flex !important;
   position: absolute;
@@ -16,14 +29,24 @@
 }
 
 .dyslexi-balance {
-
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
 }
 .dyslexi-balance-top {
   color: white;
   border-color: white;
-  margin: 0.5em;
   align-items: flex-end;
+  display: flex;
+  height: 38.181818181vh; // Golden ratio
+  h1 {
+    margin-bottom: 1.25rem;
+  }
 }
 .dyslexi-balance-bottom {
   color: #222;
+  .container {
+    margin-top: 2.5rem;
+  }
 }
