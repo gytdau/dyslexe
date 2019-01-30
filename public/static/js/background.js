@@ -1,5 +1,3 @@
 chrome.browserAction.onClicked.addListener(function (tab) {
-    ["/static/js/2.js", "/static/js/content.js"].forEach((file) => {
-        chrome.tabs.executeScript(null, { file: file });
-    });
+    chrome.tabs.executeScript(null, { file: "static/js/content.js" });
 });

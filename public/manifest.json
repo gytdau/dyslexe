@@ -3,6 +3,11 @@
   "name": "My Extension",
   "description": "This extension is a starting point to create a real Chrome extension",
   "version": "0.0.1",
+  "background": {
+    "scripts": [
+      "/static/js/background.js"
+    ]
+  },
   "browser_action": {
     "default_icon": "favicon.ico"
   },
@@ -13,9 +18,6 @@
       ],
       "css": [
         "/static/css/content.css"
-      ],
-      "js": [
-        "/static/js/content.js"
       ]
     }
   ],
