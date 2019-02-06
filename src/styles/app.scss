@@ -39,7 +39,7 @@ p {
   border-color: white;
   align-items: flex-end;
   display: flex;
-  height: 38.181818181vh; // Golden ratio
+  min-height: 38.181818181vh; // Golden ratio
   h1 {
     margin-bottom: 1.25rem;
   }

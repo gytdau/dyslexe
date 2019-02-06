@@ -16,4 +16,10 @@ export default class Goodbye extends React.Component {
       </Container>
     )
   }
+  componentDidMount() {
+    chrome.storage.sync.set({
+      responses: this.props.responses,
+      app_state: "article",
+    });
+  }
 }

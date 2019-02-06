@@ -13,7 +13,8 @@
   },
   "permissions": [
     "https://*/*",
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "web_accessible_resources": [
     "static/fonts/*"

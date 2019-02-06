@@ -1,35 +1,79 @@
 import React from 'react';
 import ReaderView from './ReaderView';
 import Onboarding from './Onboarding';
+import Readability from '../readability';
+import Article from './Article';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/app.scss';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      app_state: null,
+      article_data: {
+        loading: true
+      }
+    }
   }
   render() {
+    if (this.state.app_state == null) {
+      return (
+        <div>
+          <i className="mdi mdi-loading" />
+        </div>
+      )
+    }
+    switch (this.state.app_state) {
+      case null:
+        return (
+          <div>
+            <i className="mdi mdi-loading" />
+          </div>
+        )
+        break;
+      case "onboarding":
+        return (
+          <Onboarding />
+        )
+        break;
+      case "article":
+        return (
+          <Article article_document={this.state.article_document} />
+        )
+        break;
+    }
     return (
-      <Onboarding />
+      <div>
+        <h1>Try refreshing Dyslexi.</h1>
+      </div>
     )
   }
 
   componentDidMount() {
-    var documentClone = document.cloneNode(true);
-    /*let article = new Readability(documentClone).parse();
     this.setState({
-      loading: false,
-      title: article.title,
-      content: article.content,
+      article_document: document.cloneNode(true)
     });
+
     var elements = document.querySelectorAll('link[rel=stylesheet]');
     for (var i = 0; i < elements.length; i++) {
       elements[i].parentNode.removeChild(elements[i]);
-    }*/
+    }
 
+    /* global chrome */
     watchUndesiredContent();
     pruneUndesiredContent();
-
+    chrome.storage.sync.get('app_state', (result) => {
+      if (result.app_state == undefined) {
+        chrome.storage.sync.set({ 'app_state': 'onboarding' })
+        result = {
+          app_state: 'onboarding'
+        }
+      }
+      this.setState({
+        app_state: result.app_state
+      })
+    });
   }
 }
 function pruneUndesiredContent() {

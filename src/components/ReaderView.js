@@ -17,6 +17,13 @@ export default class ReaderView extends React.Component {
     let content = null
     if (this.state.loading) {
       content = <p>One second...</p>
+      return (
+        <div className={'dyslexi-page'}>
+          <div className={'container'}>
+            {content}
+          </div>
+        </div >
+      )
     }
     if (this.state.content == "") {
       content = <ReaderViewUnloadable />
@@ -33,5 +40,18 @@ export default class ReaderView extends React.Component {
         </div>
       </div >
     )
+  }
+  componentDidMount() {
+    let article = new Readability(this.props.article_document).parse();
+    console.log({
+      loading: false,
+      title: article.title,
+      content: article.content,
+    })
+    this.setState({
+      loading: false,
+      title: article.title,
+      content: article.content,
+    });
   }
 }

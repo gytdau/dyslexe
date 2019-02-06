@@ -51,7 +51,7 @@ export default class Onboarding extends React.Component {
       return <Welcome respond={this.next} ready={true} />
     }
     if (this.state.page == 2) {
-      return <Goodbye />
+      return <Goodbye responses={this.state.responses} />
     }
     return <Question respond={this.respond} question={questionData[this.state.question]} />
   }
