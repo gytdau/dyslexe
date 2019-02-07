@@ -76,31 +76,21 @@ export default class ReaderView extends React.Component {
             content: div,
         });
     }
-    recursiveBuild(div) {
-        if (div.nodeType == 3) {
-            return div.nodeValue
+    recursiveBuild(element) {
+        if (element.nodeType == 3) {
+            return element.nodeValue
         }
-        let children = null
-        if (div.childNodes.length > 0) {
-            children = Array.from(div.childNodes).map((el) => { return this.recursiveBuild(el) }
-            )
+        let children = Array.from(element.childNodes).map((el) => { return this.recursiveBuild(el) });
+
+        let convertedAttributes = {}
+
+        let attributes = element.attributes;
+        for (var i = 0; i < attributes.length; i++) {
+            convertedAttributes[attributes[i].nodeName] = attributes[i].nodeValue;
         }
 
-        let output = {}
-
-        if (div.attributes != undefined) {
-            var attrs = div.attributes;
-            for (var i = attrs.length - 1; i >= 0; i--) {
-                output[attrs[i].nodeName] = attrs[i].nodeValue;
-            }
-        }
-
-        if (children) {
-            return React.createElement(div.tagName, output,
-                children
-            );
-        } else {
-            return React.createElement(div.tagName, output);
-        }
+        return React.createElement(element.tagName, convertedAttributes,
+            children
+        );
     }
 }
