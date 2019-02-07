@@ -13,6 +13,7 @@ export default class ReaderView extends React.Component {
             title: ""
         }
         this.recursiveBuild = this.recursiveBuild.bind(this)
+        this.tokenify = this.tokenify.bind(this)
     }
     render() {
         let content = null
@@ -46,7 +47,7 @@ export default class ReaderView extends React.Component {
                         <h1>{this.state.title}</h1>
                     </Top>
                     <Bottom>
-                        {this.recursiveBuild(this.state.content)}
+                        {this.recursiveBuild(this.state.content, 0, true)}
                     </Bottom>
                 </Container>)
         }
@@ -76,14 +77,22 @@ export default class ReaderView extends React.Component {
             content: div,
         });
     }
-    recursiveBuild(element) {
+    recursiveBuild(element, key, shouldTokenify) {
         if (element.nodeType == 3) {
-            return element.nodeValue
+            if (shouldTokenify) {
+                return this.tokenify(element.nodeValue)
+            }
+            return element.nodeValue + " "
         }
-        let children = Array.from(element.childNodes).map((el) => { return this.recursiveBuild(el) });
+        if (shouldTokenify) {
+            shouldTokenify = !(element.tagName == "A")
+        }
+        let children = Array.from(element.childNodes).map((el) => {
+            key += 1
+            return this.recursiveBuild(el, key, shouldTokenify)
+        });
 
-        let convertedAttributes = {}
-
+        let convertedAttributes = { key }
         let attributes = element.attributes;
         for (var i = 0; i < attributes.length; i++) {
             convertedAttributes[attributes[i].nodeName] = attributes[i].nodeValue;
@@ -92,5 +101,13 @@ export default class ReaderView extends React.Component {
         return React.createElement(element.tagName, convertedAttributes,
             children
         );
+    }
+    tokenify(text) {
+        text = text.trim().split(/\s+/);
+        return text.map(token => {
+            return React.createElement("span", {},
+                token + " "
+            );
+        });
     }
 }
