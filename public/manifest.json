@@ -13,6 +13,7 @@
   },
   "permissions": [
     "https://*/*",
+    "*://cdn.materialdesignicons.com/*",
     "activeTab",
     "storage"
   ],
