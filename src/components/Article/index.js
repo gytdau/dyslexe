@@ -12,7 +12,7 @@ export default class ReaderView extends React.Component {
             content: "",
             title: ""
         }
-        //this.recursiveBuild = this.recursiveBuild.bind(this)
+        this.recursiveBuild = this.recursiveBuild.bind(this)
     }
     render() {
         let content = null
@@ -46,7 +46,7 @@ export default class ReaderView extends React.Component {
                         <h1>{this.state.title}</h1>
                     </Top>
                     <Bottom>
-                        <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
+                        {this.recursiveBuild(this.state.content)}
                     </Bottom>
                 </Container>)
         }
@@ -60,38 +60,47 @@ export default class ReaderView extends React.Component {
     }
     componentDidMount() {
         let article = new Readability(this.props.article_document).parse();
-        /*
+
         var wrapper = document.createElement('div');
         wrapper.innerHTML = article.content;
-        var div = wrapper.firstChild;*/
+        var div = wrapper.firstChild;
 
         console.log({
             loading: false,
             title: article.title,
-            content: article.content,
+            content: div,
         })
         this.setState({
             loading: false,
             title: article.title,
-            content: article.content,
+            content: div,
         });
-    }/*
+    }
     recursiveBuild(div) {
-        if (div.childNodes.length == 0) {
-            let children = []
-        } else {
-            let children = Array.from(div.childNodes).map((el) => { return this.recursiveBuild(el) }
+        if (div.nodeType == 3) {
+            return div.nodeValue
+        }
+        let children = null
+        if (div.childNodes.length > 0) {
+            children = Array.from(div.childNodes).map((el) => { return this.recursiveBuild(el) }
             )
         }
 
-        var attrs = div.attributes;
-        var output = {};
-        for (var i = attrs.length - 1; i >= 0; i--) {
-            output[attrs[i].name] = attrs[i].value;
+        let output = {}
+
+        if (div.attributes != undefined) {
+            var attrs = div.attributes;
+            for (var i = attrs.length - 1; i >= 0; i--) {
+                output[attrs[i].nodeName] = attrs[i].nodeValue;
+            }
         }
 
-        return React.createElement(div.tagName, output,
-            children
-        );
-    }*/
+        if (children) {
+            return React.createElement(div.tagName, output,
+                children
+            );
+        } else {
+            return React.createElement(div.tagName, output);
+        }
+    }
 }
