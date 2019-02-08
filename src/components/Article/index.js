@@ -10,10 +10,16 @@ export default class ReaderView extends React.Component {
         this.state = {
             loading: true,
             content: "",
-            title: ""
+            title: "",
+            highlights: {
+                letters: [],
+                words: []
+            },
+            responses: []
         }
         this.recursiveBuild = this.recursiveBuild.bind(this)
         this.tokenify = this.tokenify.bind(this)
+        this.wordHighlighted = this.wordHighlighted.bind(this)
     }
     render() {
         let content = null
@@ -46,7 +52,7 @@ export default class ReaderView extends React.Component {
                     <Top>
                         <h1>{this.state.title}</h1>
                     </Top>
-                    <Bottom>
+                    <Bottom className={this.getReaderClassNames()}>
                         {this.recursiveBuild(this.state.content, 0, true)}
                     </Bottom>
                 </Container>)
@@ -76,6 +82,21 @@ export default class ReaderView extends React.Component {
             title: article.title,
             content: div,
         });
+        chrome.storage.sync.get(['highlights', 'responses'], (result) => {
+            this.setState(result)
+        })
+    }
+    getReaderClassNames() {
+        let { responses } = this.state
+        if (responses.length === 0) {
+            return ""
+        }
+        console.log(responses)
+        return [
+            responses.text_bunched && "text_bunched",
+            responses.text_small && "text_small",
+            responses.lines_skip && "lines_skip",
+        ].filter(Boolean).join(' ')
     }
     recursiveBuild(element, key, shouldTokenify) {
         if (element.nodeType == 3) {
@@ -102,12 +123,45 @@ export default class ReaderView extends React.Component {
             children
         );
     }
+    wordHighlighted(word) {
+        word = word.toLowerCase().replace(/[^a-z]/gi, '');
+        chrome.storage.sync.get('highlights', (result) => {
+            let updated = {}
+            if (result.highlights == undefined) {
+                updated = {
+                    highlights: {
+                        letters: [],
+                        words: []
+                    }
+                }
+            } else {
+                updated = result
+            }
+            if (updated.highlights.words.includes(word)) {
+                updated.highlights.words = updated.highlights.words.filter(item => item != word)
+            } else {
+                updated.highlights.words.push(word)
+            }
+            console.log(updated)
+            chrome.storage.sync.set(updated)
+            this.setState({
+                ...updated
+            })
+        });
+    }
     tokenify(text) {
         text = text.trim().split(/\s+/);
         return text.map(token => {
-            return React.createElement("span", {},
+            return React.createElement("span", {
+                className: "word" + (this.isWordHighlighted(token) ? " highlighted" : ""),
+                onClick: () => { this.wordHighlighted(token) }
+            },
                 token + " "
             );
         });
+    }
+    isWordHighlighted(word) {
+        word = word.toLowerCase().replace(/[^a-z]/gi, '');
+        return this.state.highlights.words.includes(word)
     }
 }

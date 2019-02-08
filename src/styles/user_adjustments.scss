@@ -7,6 +7,17 @@
 .lines_skip {
   line-height: 2.5;
 }
-.token_expanded {
-  
+.word:hover {
+  background-color: rgba(255, 193, 7, 0.4)
+}
+.word {
+  cursor: pointer;
+}
+.highlighted {
+  background-color: rgba(255, 193, 7, 0.21);
+  letter-spacing: 3px;
+  transition: all 0.1s;
+}
+.highlighted:hover {
+  background-color: rgba(255, 193, 7, 0.4);
 }
