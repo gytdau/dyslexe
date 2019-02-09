@@ -4,8 +4,31 @@
   font-weight: normal;
   font-style: normal;
 }
+/* latin */
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Fira Sans Regular"), local("FiraSans-Regular"),
+    url("chrome-extension://__MSG_@@extension_id__/static/fonts/fira-sans-regular.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin */
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 800;
+  src: local("Fira Sans ExtraBold"), local("FiraSans-ExtraBold"),
+    url("chrome-extension://__MSG_@@extension_id__/static/fonts/fira-sans-extra-bold.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 .open-dyslexic {
   font-family: "Open Dyslexic", sans-serif;
+  line-height: 2;
 }
 .times-new-roman {
   font-family: "Times New Roman", Cambria, Cochin, Georgia, Times, serif;

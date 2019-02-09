@@ -17,8 +17,21 @@ export default class Goodbye extends React.Component {
     )
   }
   componentDidMount() {
+    let { upsidedown_letters_characters, mix_up_letters_combinations } = this.props.responses
+    console.log(upsidedown_letters_characters, mix_up_letters_combinations)
+    let letters = []
+    if (upsidedown_letters_characters) {
+      letters = letters.concat(upsidedown_letters_characters)
+    }
+    if (mix_up_letters_combinations) {
+      mix_up_letters_combinations.map((a) => { letters = letters.concat(a) })
+    }
+    letters = letters.filter((a) => a.length == 1)
+    let highlights = { letters, words: [] }
+
     chrome.storage.sync.set({
       responses: this.props.responses,
+      highlights,
       app_state: "article",
     });
   }

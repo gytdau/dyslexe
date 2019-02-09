@@ -2,6 +2,7 @@ import { Bottom, Container, Top } from '../DyslexiBalance'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Readability from '../../readability';
+import { isProbablyReaderable } from '../../readable';
 import "../../styles/readerview.scss";
 
 export default class ReaderView extends React.Component {
@@ -9,6 +10,7 @@ export default class ReaderView extends React.Component {
         super(props);
         this.state = {
             loading: true,
+            available: true,
             content: "",
             title: "",
             highlights: {
@@ -33,7 +35,7 @@ export default class ReaderView extends React.Component {
                 </div >
             )
         }
-        if (this.state.content == "") {
+        if (!this.state.available) {
             return (
                 <Container>
                     <Top>
@@ -66,24 +68,28 @@ export default class ReaderView extends React.Component {
         )
     }
     componentDidMount() {
+        if (!isProbablyReaderable(this.props.article_document)) {
+            this.setState({
+                loading: false,
+                available: false
+            })
+            return
+        }
         let article = new Readability(this.props.article_document).parse();
 
         var wrapper = document.createElement('div');
         wrapper.innerHTML = article.content;
         var div = wrapper.firstChild;
 
-        console.log({
-            loading: false,
-            title: article.title,
-            content: div,
-        })
         this.setState({
             loading: false,
             title: article.title,
-            content: div,
+            content: div
         });
         chrome.storage.sync.get(['highlights', 'responses'], (result) => {
+            console.log(result)
             this.setState(result)
+            console.log(this.state)
         })
     }
     getReaderClassNames() {
@@ -120,7 +126,7 @@ export default class ReaderView extends React.Component {
             convertedAttributes[attributes[i].nodeName] = attributes[i].nodeValue;
         }
 
-        return React.createElement(element.tagName, convertedAttributes,
+        return React.createElement(element.tagName.toLowerCase(), convertedAttributes,
             children
         );
     }
@@ -163,6 +169,7 @@ export default class ReaderView extends React.Component {
     }
     isWordHighlighted(word) {
         word = word.toLowerCase().replace(/[^a-z]/gi, '');
-        return this.state.highlights.words.includes(word)
+        let found = this.state.highlights.letters.map((letter) => word.includes(letter)).some(Boolean)
+        return this.state.highlights.words.includes(word) || found
     }
 }
