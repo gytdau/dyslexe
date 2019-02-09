@@ -15,7 +15,8 @@
     "https://*/*",
     "*://cdn.materialdesignicons.com/*",
     "activeTab",
-    "storage"
+    "storage",
+    "*://*.materialdesignicons.com/*"
   ],
   "web_accessible_resources": [
     "static/fonts/*"
