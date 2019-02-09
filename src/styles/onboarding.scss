@@ -19,6 +19,9 @@
   color: #333;
   border-color: #333;
 }
+.btn-primary-large {
+  width: 15em;
+}
 
 .letter-input {
   margin-bottom: 1.25rem;
@@ -37,4 +40,12 @@
     font-size: 2rem;
     margin: 10px;
   }
+}
+
+.font-choose {
+  p {
+    padding: 2em;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  margin-bottom: 4em;
 }

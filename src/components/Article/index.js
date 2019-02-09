@@ -96,6 +96,7 @@ export default class ReaderView extends React.Component {
             responses.text_bunched && "text_bunched",
             responses.text_small && "text_small",
             responses.lines_skip && "lines_skip",
+            responses.font_prefer
         ].filter(Boolean).join(' ')
     }
     recursiveBuild(element, key, shouldTokenify) {

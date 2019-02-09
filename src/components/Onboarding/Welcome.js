@@ -8,10 +8,10 @@ export default class Welcome extends React.Component {
     return (
       <Container>
         <Top>
-          <h1>Welcome to Dyslexi</h1>
+          <h1>Welcome to Dyslex E</h1>
         </Top>
         <Bottom>
-          <p>Dyslexi can help you read articles faster and more comfortably.</p>
+          <p>Dyslex E can help you read articles faster and more comfortably.</p>
           <p>To get started, let's go through a short questionnaire so that we can help you the best.</p>
           <div className="btn btn-primary" onClick={this.props.respond}>Start</div>
         </Bottom>

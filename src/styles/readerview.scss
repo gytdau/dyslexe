@@ -17,7 +17,7 @@ pre {
  * must be added to CLASSES_TO_PRESERVE in ReaderMode.jsm, so that
  * Readability.js doesn't strip them out */
 
- .dyslexi-page {
+.dyslexi-page {
   font-size: 1em;
   line-height: 1.6em;
   margin-top: 5em;
@@ -45,7 +45,7 @@ pre {
 }
 
 .dyslexi-page.line-height6 {
-  line-height: 2.0em;
+  line-height: 2em;
 }
 
 .dyslexi-page.line-height7 {
@@ -153,8 +153,7 @@ pre {
 }
 
 .dyslexi-page .caption,
-.dyslexi-page .wp-caption-text
-.dyslexi-page figcaption {
+.dyslexi-page .wp-caption-text .dyslexi-page figcaption {
   font-size: 0.9em;
   line-height: 1.48em;
   font-style: italic;
@@ -212,7 +211,7 @@ pre {
   border-width: 0;
   /* height: auto is implied from `.dyslexi-page *` rule. */
   width: 1em;
-  margin: 0 .07em;
+  margin: 0 0.07em;
   padding: 0;
 }
 

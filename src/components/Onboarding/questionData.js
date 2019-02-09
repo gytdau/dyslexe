@@ -40,5 +40,10 @@ export default [
         text: "Do you often find the text size too small?",
         id: "text_small",
         type: "YesNo"
-    }
+    },
+    {
+        text: "Which font do you prefer?",
+        id: "font_prefer",
+        type: "FontTest"
+    },
 ]

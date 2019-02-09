@@ -1,12 +1,15 @@
-@import 'colors';
-@import 'firasans';
-@import 'onboarding';
-@import 'user_adjustments';
+@import "colors";
+@import "firasans";
+@import "onboarding";
+@import "user_adjustments";
+@import "fonts";
 
-* {
-  font-family: "Fira Sans";
-}
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 800;
 }
 p {
@@ -27,6 +30,7 @@ p {
   justify-items: center;
   background-color: #fff;
   overflow-y: scroll;
+  font-family: "Fira Sans";
 }
 
 .dyslexi-balance {
@@ -49,5 +53,21 @@ p {
   color: #222;
   .container {
     margin-top: 2.5rem;
+  }
+}
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.4s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
