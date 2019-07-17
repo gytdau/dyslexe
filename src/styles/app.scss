@@ -12,27 +12,53 @@ h5,
 h6 {
   font-weight: 800;
 }
-p {
-  font-size: 1.3em;
-}
 .size-normal {
   font-size: 1.3rem;
 }
-.dyslexi-viewer {
-  display: flex !important;
-  position: absolute;
+.dyslexi-inserted-content-inner {
+  position: fixed;
   top: 0;
-  left: 0;
-  width: 100vw;
+  right: 0;
+  display: flex !important;
   height: 100%;
   z-index: 1000;
   align-items: center;
   justify-items: center;
-  background-color: #fff;
+  background-color: transparent;
   overflow-y: scroll;
   font-family: "Fira Sans";
 }
-
+.dyslexi-sidebar-container {
+  z-index: 99999;
+  display: flex;
+  justify-items: flex-end;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1000;
+  background-color: white;
+  font-family: "Fira Sans";
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 25em;
+  & > * {
+    font-family: "Fira Sans";
+  }
+}
+.dyslexi-sidebar {
+  overflow-y: scroll;
+}
+.sidebar-content {
+  padding: 0 3rem 3rem 3rem;
+}
+.input-component {
+  margin: 3em 0;
+}
+.full-screen-view {
+  background: white;
+  width: 100%;
+}
 .dyslexi-balance {
   display: flex;
   width: 100%;
@@ -62,7 +88,6 @@ p {
   animation-timing-function: ease-in;
   animation-duration: 0.4s;
 }
-
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;

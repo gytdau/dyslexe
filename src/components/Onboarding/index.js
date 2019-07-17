@@ -1,19 +1,19 @@
-import React from 'react';
-import ReaderView from '../ReaderView';
+import React from 'react'
+import ReaderView from '../ReaderView'
 import { Bottom, Container, Top } from '../DyslexiBalance'
 import questionData from './questionData'
-import Welcome from './Welcome';
-import Goodbye from './Goodbye';
-import Question from './Question';
+import Welcome from './Welcome'
+import Goodbye from './Goodbye'
+import Question from './Question'
 
 export default class Onboarding extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       responses: {},
       question: 0,
       questionCount: 1,
-      page: 0, // 0 = Welcome, 1 = Questions, 2 = Goodbye
+      page: 0 // 0 = Welcome, 1 = Questions, 2 = Goodbye
     }
 
     this.respond = this.respond.bind(this)
@@ -29,7 +29,12 @@ export default class Onboarding extends React.Component {
       this.setState({ question, page, responses, questionCount })
       return
     }
-    while (!(questionData[question].if == undefined || responses[questionData[question].if])) {
+    while (
+      !(
+        questionData[question].if == undefined ||
+        responses[questionData[question].if]
+      )
+    ) {
       question += 1
       if (question >= questionData.length) {
         page += 1
@@ -41,7 +46,7 @@ export default class Onboarding extends React.Component {
   }
   next() {
     if (this.state.page == 2) {
-      alert("Goodbye.")
+      alert('Goodbye.')
       return
     }
     this.setState({
@@ -53,8 +58,20 @@ export default class Onboarding extends React.Component {
       return <Welcome respond={this.next} ready={true} />
     }
     if (this.state.page == 2) {
-      return <Goodbye responses={this.state.responses} />
+      return (
+        <Goodbye
+          setAppState={this.props.setAppState}
+          responses={this.state.responses}
+        />
+      )
     }
-    return <Question key={this.state.questionCount} respond={this.respond} question={questionData[this.state.question]} questionCount={this.state.questionCount} />
+    return (
+      <Question
+        key={this.state.questionCount}
+        respond={this.respond}
+        question={questionData[this.state.question]}
+        questionCount={this.state.questionCount}
+      />
+    )
   }
 }
