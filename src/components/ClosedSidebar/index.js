@@ -1,4 +1,6 @@
 import React from 'react'
+import styles from '../../styles/app.module.scss'
+import FloatingButton from './FloatingButton'
 
 export default class ClosedSidebar extends React.Component {
   constructor(props) {
@@ -6,13 +8,15 @@ export default class ClosedSidebar extends React.Component {
   }
   render() {
     return (
-      <div className="dyslexi-floating">
-        <div
+      <div className={styles['sidebar-floating']}>
+        <FloatingButton
+          icon="settings"
           onClick={() => this.props.setAppState({ sidebar: true })}
-          className="btn btn-default btn-lg"
-        >
-          Open <i className="mdi mdi-chevron-right" />
-        </div>
+        />
+        <FloatingButton
+          icon="fullscreen"
+          onClick={() => this.props.setAppState({ fullscreen: true })}
+        />
       </div>
     )
   }

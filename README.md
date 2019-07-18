@@ -8,6 +8,10 @@ We're running on React. You can check out the React components under `src/compon
 
 Bootstrapped with Create React App, and uses [this guide](https://veerasundar.com/blog/2018/05/how-to-create-a-chrome-extension-in-react-js/) and [that guide](https://medium.com/@gilfink/building-a-chrome-extension-using-react-c5bfe45aaf36) to make things work. You don't have to read these, they're just for reference.
 
+## Styles
+
+Our SCSS code is in CSS modules which are automatically minifed on build so that they do not clash with the classes present in normal webpages.
+
 ## Building
 
 Whenever you make a change, you'll have to rebuild the extension so that the changes you made are compiled down into the extension. Run `yarn build` to generate a `build` folder. Then, add the `build` folder as an unpacked extension in the Chrome extensions page. You should see the extension on your toolbar. Remember to rebuild after you make changes. Happy experimenting!

@@ -4,10 +4,13 @@ import Onboarding from './Onboarding'
 import Readability from '../readability'
 import Article from './Article'
 import 'bootstrap/dist/css/bootstrap.css'
-import '../styles/app.scss'
+import styles from '../styles/app.module.scss'
+import '../styles/user_adjustments.scss'
 import Sidebar from './Sidebar'
 import { isFulfilled } from 'q'
 import ClosedSidebar from './ClosedSidebar'
+import ColorTint from './Tools/ColorTint'
+import TextStyle from './Tools/TextStyle'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -48,53 +51,46 @@ export default class App extends React.Component {
     })
   }
   render() {
+    let content = (
+      <div>
+        <i className="mdi mdi-loading" />
+      </div>
+    )
     if (this.state.appState == null) {
-      return (
-        <div>
-          <i className="mdi mdi-loading" />
-        </div>
-      )
+      return content
     }
     switch (this.state.appState.step) {
-      case null:
-        return (
-          <div>
-            <i className="mdi mdi-loading" />
-          </div>
-        )
-        break
       case 'onboarding':
-        return (
-          <div className="full-screen-view">
+        content = (
+          <div className={styles['full-screen-view']}>
             <Onboarding setAppState={this.setAppState} />
           </div>
         )
         break
       case 'article':
         if (this.state.appState.sidebar) {
-          return (
+          content = (
             <Sidebar
               setAppState={this.setAppState}
               appState={this.state.appState}
             />
           )
         } else {
-          return (
+          content = (
             <ClosedSidebar
               setAppState={this.setAppState}
               appState={this.state.appState}
             />
           )
         }
-        //return (
-        //  <Article article_document={this.state.article_document} />
-        //)
         break
     }
     return (
-      <div>
-        <h1>Try refreshing Dyslexi.</h1>
-      </div>
+      <>
+        {content}
+        <ColorTint appState={this.state.appState} />
+        <TextStyle appState={this.state.appState} />
+      </>
     )
   }
 
@@ -116,9 +112,9 @@ export default class App extends React.Component {
 }
 function pruneUndesiredContent() {
   let body = document.getElementsByTagName('body')[0]
-  body.classList.add('dyslexi-body-loaded')
+  body.classList.add(styles['body-loaded'])
   var elements = document.querySelectorAll(
-    'body > *:not(.dyslexi-inserted-content)'
+    'body > *:not(' + styles['inserted-content'] + ')'
   )
   for (var i = 0; i < elements.length; i++) {
     //elements[i].parentNode.removeChild(elements[i])
@@ -136,23 +132,39 @@ function watchUndesiredContent() {
     }, 200 * i)
   }
 }
-function updateReadingTheme(state) {
-  let container = document.getElementsByClassName('dyslexi-inserted-content')[0]
-    .classList
-  if (state.step == 'article') {
-    container.add('dyslexi-sidebar-container')
+function removeAllBodyClasses() {
+  document
+    .getElementsByClassName(styles['inserted-content'])[0]
+    .classList.remove(styles['sidebar-container'], styles['sidebar-floating'])
+}
+function addBodyClasses(state) {
+  if (state.step != 'article') {
+    return
   }
+  let container = document.getElementsByClassName(styles['inserted-content'])[0]
+    .classList
+  if (state.sidebar) {
+    container.add(styles['sidebar-container'])
+  } else {
+    container.add(styles['sidebar-floating'])
+  }
+}
+function handleColorTint(state) {
+  let colorTint = document.getElementsByClassName(styles['color-tint'])
+  if (state.colorTint) {
+    if (colorTint.length == 0) {
+      document.get
+    }
+  }
+}
+function updateReadingTheme(state) {
+  removeAllBodyClasses()
+  addBodyClasses(state)
+  handleColorTint(state)
   var els = document.getElementsByTagName('*')
   for (var i = 0, all = els.length; i < all; i++) {
-    els[i].classList.remove(
-      'textSize-1',
-      'textSize-2',
-      'textSize-3',
-      'lineHeight-1',
-      'lineHeight-2',
-      'lineHeight-3'
-    )
-    els[i].classList.add('textSize-' + state.textSize)
-    els[i].classList.add('lineHeight-' + state.lineHeight)
+    if (state.textEnhancements) {
+      els[i].classList.add(styles['text-token'])
+    }
   }
 }
