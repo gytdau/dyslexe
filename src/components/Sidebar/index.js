@@ -15,7 +15,7 @@ export default class Sidebar extends React.Component {
   render() {
     console.log(this.props.appState)
     return (
-      <div className={styles['sidebar']}>
+      <div className={styles['sidebar'] + ' ' + styles['dyslexi-render']}>
         <div className="list-group list-group-flush">
           <CloseButton setAppState={this.props.setAppState} />
         </div>
@@ -55,7 +55,7 @@ export default class Sidebar extends React.Component {
                 className="mt-4"
                 color={this.props.appState.colorTintColor}
                 onChangeComplete={color =>
-                  this.props.setAppState({ colorTintColor: color })
+                  this.props.setAppState({ colorTintColor: color.hex })
                 }
               />
             </Group>

@@ -14,7 +14,7 @@ export default class PropertySlider extends React.Component {
           min={1}
           defaultValue={this.props.value}
           max={5}
-          marks={{ 1: 'Small', 3: 'Big' }}
+          marks={{ 1: 'Small', 5: 'Big' }}
           step={1}
           onChange={value =>
             this.props.setAppState({ [this.props.valueName]: value })

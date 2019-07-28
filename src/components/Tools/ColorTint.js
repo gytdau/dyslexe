@@ -8,6 +8,7 @@ export default class ColorTint extends React.Component {
   constructor(props) {
     super(props)
     this.el = document.createElement('div')
+    this.el.className += ' ' + styles['dyslexi-render']
   }
 
   componentDidMount() {

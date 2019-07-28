@@ -24,6 +24,12 @@
 .text-token {
   opacity: 1;
 }
+.text-token-hidden {
+  display: none;
+}
+.dyslexi-render {
+  fill: purple;
+}
 .color-tint {
   position: fixed;
   z-index: 100000;

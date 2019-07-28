@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import styles from '../styles/app.module.scss'
 import '../styles/user_adjustments.scss'
 import Sidebar from './Sidebar'
-import { isFulfilled } from 'q'
+import * as ManipulationTools from '../scripts/ManipulationTools'
 import ClosedSidebar from './ClosedSidebar'
 import ColorTint from './Tools/ColorTint'
 import TextStyle from './Tools/TextStyle'
@@ -31,7 +31,7 @@ export default class App extends React.Component {
     Object.assign(appState, values)
     this.setState({ appState })
     chrome.storage.sync.set({ appState })
-    updateReadingTheme(appState)
+    ManipulationTools.updateReadingTheme(appState)
   }
   refreshState() {
     chrome.storage.sync.get('appState', result => {
@@ -47,7 +47,7 @@ export default class App extends React.Component {
       this.setState({
         appState: result.appState
       })
-      updateReadingTheme(result.appState)
+      ManipulationTools.updateReadingTheme(result.appState)
     })
   }
   render() {
@@ -62,7 +62,11 @@ export default class App extends React.Component {
     switch (this.state.appState.step) {
       case 'onboarding':
         content = (
-          <div className={styles['full-screen-view']}>
+          <div
+            className={
+              styles['full-screen-view'] + ' ' + styles['dyslexi-render']
+            }
+          >
             <Onboarding setAppState={this.setAppState} />
           </div>
         )
@@ -105,66 +109,6 @@ export default class App extends React.Component {
     }
 
     /* global chrome */
-    watchUndesiredContent()
-    pruneUndesiredContent()
     this.refreshState()
-  }
-}
-function pruneUndesiredContent() {
-  let body = document.getElementsByTagName('body')[0]
-  body.classList.add(styles['body-loaded'])
-  var elements = document.querySelectorAll(
-    'body > *:not(' + styles['inserted-content'] + ')'
-  )
-  for (var i = 0; i < elements.length; i++) {
-    //elements[i].parentNode.removeChild(elements[i])
-  }
-  var elements = document.querySelectorAll('link, style, script')
-  for (var i = 0; i < elements.length; i++) {
-    //elements[i].parentNode.removeChild(elements[i])
-  }
-}
-function watchUndesiredContent() {
-  let i = 0
-  for (i = 0; i < 10; i++) {
-    setTimeout(function() {
-      pruneUndesiredContent()
-    }, 200 * i)
-  }
-}
-function removeAllBodyClasses() {
-  document
-    .getElementsByClassName(styles['inserted-content'])[0]
-    .classList.remove(styles['sidebar-container'], styles['sidebar-floating'])
-}
-function addBodyClasses(state) {
-  if (state.step != 'article') {
-    return
-  }
-  let container = document.getElementsByClassName(styles['inserted-content'])[0]
-    .classList
-  if (state.sidebar) {
-    container.add(styles['sidebar-container'])
-  } else {
-    container.add(styles['sidebar-floating'])
-  }
-}
-function handleColorTint(state) {
-  let colorTint = document.getElementsByClassName(styles['color-tint'])
-  if (state.colorTint) {
-    if (colorTint.length == 0) {
-      document.get
-    }
-  }
-}
-function updateReadingTheme(state) {
-  removeAllBodyClasses()
-  addBodyClasses(state)
-  handleColorTint(state)
-  var els = document.getElementsByTagName('*')
-  for (var i = 0, all = els.length; i < all; i++) {
-    if (state.textEnhancements) {
-      els[i].classList.add(styles['text-token'])
-    }
   }
 }

@@ -16,7 +16,7 @@ console.log(styles)
 
 // Render the app
 const app = document.createElement('div')
-app.className = styles['inserted-content']
+app.className = styles['inserted-content'] + ' ' + styles['dyslexi-render']
 document.getElementsByTagName('body')[0].appendChild(app)
 ReactDOM.render(<Content />, app)
 var elements = document.querySelectorAll('link[rel=stylesheet]')

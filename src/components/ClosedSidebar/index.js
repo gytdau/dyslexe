@@ -8,14 +8,20 @@ export default class ClosedSidebar extends React.Component {
   }
   render() {
     return (
-      <div className={styles['sidebar-floating']}>
+      <div
+        className={styles['sidebar-floating'] + ' ' + styles['dyslexi-render']}
+      >
         <FloatingButton
           icon="settings"
           onClick={() => this.props.setAppState({ sidebar: true })}
         />
         <FloatingButton
           icon="fullscreen"
-          onClick={() => this.props.setAppState({ fullscreen: true })}
+          onClick={() =>
+            this.props.setAppState({
+              fullscreen: !this.props.appState.fullscreen
+            })
+          }
         />
       </div>
     )
