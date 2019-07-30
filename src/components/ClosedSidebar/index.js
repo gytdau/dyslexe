@@ -16,7 +16,9 @@ export default class ClosedSidebar extends React.Component {
           onClick={() => this.props.setAppState({ sidebar: true })}
         />
         <FloatingButton
-          icon="fullscreen"
+          icon={
+            this.props.appState.fullscreen ? 'fullscreen-exit' : 'fullscreen'
+          }
           onClick={() =>
             this.props.setAppState({
               fullscreen: !this.props.appState.fullscreen

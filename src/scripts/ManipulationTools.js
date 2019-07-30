@@ -1,33 +1,50 @@
 import styles from '../styles/app.module.scss'
 
+let bodyStorage = null
+
 // FULLSCREEN
 function zap() {
+  console.log('Zapping has occured.')
+  if (bodyStorage != null) {
+    return
+  }
   let body = document.getElementsByTagName('body')[0]
   body.classList.add(styles['body-loaded'])
+  storeBodyData()
+  deleteBodyNodes()
+}
+function unzap() {
+  restoreBodyNodes()
+}
+function storeBodyData() {
   let elements = document.querySelectorAll(
-    'body > *:not(' + styles['inserted-content'] + ')'
+    'body > *:not(.' + styles['dyslexi-render'] + ')'
   )
-  console.log('ZAP HAS COMMENCED!')
-  console.log(elements)
-  /*for (var i = 0; i < elements.length; i++) {
-    elements[i].parentNode.removeChild(elements[i])
-  }
-  var elements = document.querySelectorAll('link, style, script')
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].parentNode.removeChild(elements[i])
-  }*/
+  bodyStorage = []
+  elements.forEach(element => bodyStorage.push(element.cloneNode(true)))
 }
-function zapManyTimes() {
-  let i = 0
-  for (i = 0; i < 10; i++) {
-    setTimeout(function() {
-      zap()
-    }, 200 * i)
-  }
+function restoreBodyNodes() {
+  let body = document.getElementsByTagName('body')[0]
+  bodyStorage.forEach(element => body.appendChild(element))
+  bodyStorage = null
 }
-function becomeFullsceen(state) {
+function deleteBodyNodes() {
+  let elements = document.querySelectorAll(
+    'body > *:not(.' + styles['dyslexi-render'] + ')'
+  )
+  elements.forEach(element => element.parentNode.removeChild(element))
+}
+function detectFullscreen(state) {
+  if (state.step == 'onboarding') {
+    zap()
+    return
+  }
   if (state.fullscreen) {
     zap()
+  } else {
+    if (bodyStorage != null) {
+      unzap()
+    }
   }
 }
 
@@ -53,7 +70,7 @@ function addBodyClasses(state) {
 function updateReadingTheme(state) {
   removeAllBodyClasses()
   addBodyClasses(state)
-  becomeFullsceen(state)
+  detectFullscreen(state)
   var els = document.getElementsByTagName('*')
   for (var i = 0, all = els.length; i < all; i++) {
     els[i].classList.add(styles['text-token'])

@@ -19,7 +19,3 @@ const app = document.createElement('div')
 app.className = styles['inserted-content'] + ' ' + styles['dyslexi-render']
 document.getElementsByTagName('body')[0].appendChild(app)
 ReactDOM.render(<Content />, app)
-var elements = document.querySelectorAll('link[rel=stylesheet]')
-for (var i = 0; i < elements.length; i++) {
-  //elements[i].parentNode.removeChild(elements[i])
-}

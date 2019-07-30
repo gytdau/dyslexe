@@ -1,5 +1,5 @@
 import React from 'react'
-import ReaderView from './ReaderView'
+import ReaderView from './Tools/ReaderView'
 import Onboarding from './Onboarding'
 import Readability from '../readability'
 import Article from './Article'
@@ -17,9 +17,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       appState: null,
-      article_data: {
-        loading: true
-      }
+      article_data: null
     }
     this.setAppState = this.setAppState.bind(this)
     this.refreshState = this.refreshState.bind(this)
@@ -27,9 +25,13 @@ export default class App extends React.Component {
   setAppState(values) {
     console.log('Chrome app state has been updated!')
     console.log(values)
-    let appState = this.state.appState
+    let { appState, article_data } = this.state
+    if (!this.state.appState.fullscreen && values.fullscreen) {
+      console.log('!!! Document has been cloned, entering fullscreen...')
+      article_data = document.cloneNode(true)
+    }
     Object.assign(appState, values)
-    this.setState({ appState })
+    this.setState({ appState, article_data })
     chrome.storage.sync.set({ appState })
     ManipulationTools.updateReadingTheme(appState)
   }
@@ -44,8 +46,13 @@ export default class App extends React.Component {
         result.appState = appState
         chrome.storage.sync.set({ appState })
       }
+      let { article_data } = this.state
+      if (result.appState.fullscreen) {
+        article_data = document.cloneNode(true)
+      }
       this.setState({
-        appState: result.appState
+        appState: result.appState,
+        article_data
       })
       ManipulationTools.updateReadingTheme(result.appState)
     })
@@ -87,6 +94,16 @@ export default class App extends React.Component {
             />
           )
         }
+        if (this.state.appState.fullscreen) {
+          content = (
+            <>
+              {this.state.article_data ? (
+                <ReaderView article_document={this.state.article_data} />
+              ) : null}
+              {content}
+            </>
+          )
+        }
         break
     }
     return (
@@ -102,11 +119,6 @@ export default class App extends React.Component {
     this.setState({
       article_document: document.cloneNode(true)
     })
-
-    var elements = document.querySelectorAll('link[rel=stylesheet]')
-    for (var i = 0; i < elements.length; i++) {
-      //elements[i].parentNode.removeChild(elements[i])
-    }
 
     /* global chrome */
     this.refreshState()

@@ -1,12 +1,13 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
+import styles from '../../styles/app.module.scss'
+import CloseButton from './CloseButton'
+import ColorPicker from './ColorPicker'
+import DemoNotice from './DemoNotice'
+import FontPicker from './FontPicker'
+import Group from './Group'
 import PropertySlider from './PropertySlider'
 import TestAgain from './TestAgain'
-import DemoNotice from './DemoNotice'
-import CloseButton from './CloseButton'
-import styles from '../../styles/app.module.scss'
-import Group from './Group'
-import { SliderPicker } from 'react-color'
-import FontPicker from './FontPicker'
 
 export default class Sidebar extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class Sidebar extends React.Component {
           <div className="list-group list-group-flush">
             <Group
               label="Text enhancements"
+              help="Change how big the text is or how spaced apart it is."
               {...this.props}
               switch="textEnhancements"
             >
@@ -47,22 +49,27 @@ export default class Sidebar extends React.Component {
                 }
               />
             </Group>
-            <Group label="Font" {...this.props} switch="fontChange">
+            <Group
+              help="Change the font the text is shown in."
+              label="Font"
+              {...this.props}
+              switch="fontChange"
+            >
               <FontPicker {...this.props} />
             </Group>
-            <Group label="Color tint" {...this.props} switch="colorTint">
-              <SliderPicker
-                className="mt-4"
-                color={this.props.appState.colorTintColor}
-                onChangeComplete={color =>
-                  this.props.setAppState({ colorTintColor: color.hex })
-                }
-              />
+            <Group
+              help="Add a light transparent color to the entire page."
+              label="Color tint"
+              {...this.props}
+              switch="colorTint"
+            >
+              <ColorPicker {...this.props} />
             </Group>
-            <TestAgain />
+            <TestAgain {...this.props} />
             <DemoNotice />
           </div>
         </div>
+        <ReactTooltip />
       </div>
     )
   }

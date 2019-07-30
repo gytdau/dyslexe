@@ -53,6 +53,7 @@
     "react-dom": "^16.6.3",
     "react-select": "^3.0.4",
     "react-switch": "^5.0.1",
+    "react-tooltip": "^3.10.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",

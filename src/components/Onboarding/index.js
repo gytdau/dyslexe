@@ -1,5 +1,5 @@
 import React from 'react'
-import ReaderView from '../ReaderView'
+import ReaderView from '../Tools/ReaderView'
 import { Bottom, Container, Top } from '../DyslexiBalance'
 import questionData from './questionData'
 import Welcome from './Welcome'
@@ -45,10 +45,6 @@ export default class Onboarding extends React.Component {
     this.setState({ question, page, responses, questionCount })
   }
   next() {
-    if (this.state.page == 2) {
-      alert('Goodbye.')
-      return
-    }
     this.setState({
       page: this.state.page + 1
     })

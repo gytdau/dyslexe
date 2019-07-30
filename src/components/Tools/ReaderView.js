@@ -1,10 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Readability from '../readability'
-import '../styles/readerview.scss'
+import Readability from '../../readability'
+import styles from '../../styles/app.module.scss'
+import '../../styles/readerview.scss'
 import ReaderViewUnloadable from './ReaderViewUnloadable'
+import Tool from './Tool'
 
-export default class ReaderView extends React.Component {
+const body = document.getElementsByTagName('body')[0]
+
+export default class ReaderView extends Tool {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,13 +37,21 @@ export default class ReaderView extends React.Component {
         </div>
       )
     }
-    return (
+    return ReactDOM.createPortal(
       <div className={'dyslexi-page'}>
-        <div className={'container'}>{content}</div>
-      </div>
+        <div className={'container ' + styles['text-token']}>{content}</div>
+      </div>,
+      this.el
     )
   }
   componentDidMount() {
+    body.appendChild(this.el)
+    console.log('Readability has received this:')
+    console.log(this.props)
+    if (!this.props.article_document) {
+      alert("Uh oh! It looks like we can't see this article in fullscreen.")
+      return
+    }
     let article = new Readability(this.props.article_document).parse()
 
     this.setState({

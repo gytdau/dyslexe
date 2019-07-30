@@ -1,6 +1,6 @@
-import React from 'react'
-import Slider, { Range } from 'rc-slider'
+import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import React from 'react'
 import styles from '../../styles/app.module.scss'
 export default class PropertySlider extends React.Component {
   constructor(props) {

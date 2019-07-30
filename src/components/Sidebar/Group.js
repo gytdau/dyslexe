@@ -1,8 +1,7 @@
-import React from 'react'
-import Slider, { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css'
-import styles from '../../styles/app.module.scss'
+import React from 'react'
 import Switch from 'react-switch'
+import styles from '../../styles/app.module.scss'
 export default class Group extends React.Component {
   constructor(props) {
     super(props)
@@ -12,7 +11,13 @@ export default class Group extends React.Component {
       <div className="list-group-item">
         <div className={styles['input-component']}>
           <div className="d-flex justify-content-between">
-            <h5>{this.props.label}</h5>
+            <h5>
+              {this.props.label}{' '}
+              <i
+                className={'mdi mdi-help-circle-outline ' + styles['help-icon']}
+                data-tip={this.props.help}
+              />
+            </h5>
             <Switch
               checked={this.props.appState[this.props.switch]}
               onChange={() =>
@@ -29,8 +34,7 @@ export default class Group extends React.Component {
               activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
               height={20}
               width={48}
-              className="react-switch"
-              id="material-switch"
+              className={styles['switch']}
             />
           </div>
           {this.props.appState[this.props.switch] ? this.props.children : null}

@@ -37,7 +37,7 @@ export default class TextStyle extends React.Component {
     // Generate CSS
     let result = ''
     for (var key in style) {
-      result += key + ': ' + style[key] + '; '
+      result += key + ': ' + style[key] + ' !important; '
     }
     return '.' + styles['text-token'] + ' {' + result + '}'
   }

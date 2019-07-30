@@ -1,7 +1,5 @@
-import React from 'react'
-import Slider, { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css'
-import styles from '../../styles/app.module.scss'
+import React from 'react'
 import Select from 'react-select'
 
 let fonts = [
