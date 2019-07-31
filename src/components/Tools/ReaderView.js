@@ -22,8 +22,8 @@ export default class ReaderView extends Tool {
     if (this.state.loading) {
       content = <p>One second...</p>
       return (
-        <div className={'dyslexi-page'}>
-          <div className={'container'}>{content}</div>
+        <div className={cx('dyslexi-page')}>
+          <div className={cx('dyslexi-page-inner')}>{content}</div>
         </div>
       )
     }
@@ -38,8 +38,8 @@ export default class ReaderView extends Tool {
       )
     }
     return ReactDOM.createPortal(
-      <div className={'dyslexi-page'}>
-        <div className={'container ' + cx('text-token')}>{content}</div>
+      <div className={cx('dyslexi-page')}>
+        <div className={cx('dyslexi-page-inner', 'text-token')}>{content}</div>
       </div>,
       this.el
     )

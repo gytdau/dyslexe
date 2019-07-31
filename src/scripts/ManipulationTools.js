@@ -1,6 +1,7 @@
 import cx from '../components/styles'
 
 let bodyStorage = null
+let headStorage = null
 
 // FULLSCREEN
 function zap() {
@@ -22,16 +23,24 @@ function storeBodyData() {
   )
   bodyStorage = []
   elements.forEach(element => bodyStorage.push(element.cloneNode(true)))
+  elements = document.querySelectorAll('head > *')
+  headStorage = []
+  elements.forEach(element => headStorage.push(element.cloneNode(true)))
 }
 function restoreBodyNodes() {
   let body = document.getElementsByTagName('body')[0]
   bodyStorage.forEach(element => body.appendChild(element))
   bodyStorage = null
+  let head = document.getElementsByTagName('head')[0]
+  headStorage.forEach(element => head.appendChild(element))
+  headStorage = null
 }
 function deleteBodyNodes() {
   let elements = document.querySelectorAll(
     'body > *:not(.' + cx('dyslexi-render') + ')'
   )
+  elements.forEach(element => element.parentNode.removeChild(element))
+  elements = document.querySelectorAll('head > *')
   elements.forEach(element => element.parentNode.removeChild(element))
 }
 function detectFullscreen(state) {

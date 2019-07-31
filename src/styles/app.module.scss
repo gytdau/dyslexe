@@ -37,7 +37,7 @@ h6 {
   }
 }
 .sidebar-floating {
-  z-index: 99999;
+  z-index: 999999;
   padding: 2em;
   justify-items: flex-end;
   justify-content: flex-end;
@@ -132,6 +132,27 @@ h6 {
   > * {
     margin-top: 2.5rem;
   }
+}
+.dyslexi-page {
+  z-index: 99998;
+  background: white !important;
+}
+.dyslexi-page-inner {
+  max-width: 60em;
+  margin: auto;
+  margin-top: 4em;
+  padding: 2em 6em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+img {
+  position: relative;
+  z-index: 100001;
 }
 .fade-in {
   opacity: 1;

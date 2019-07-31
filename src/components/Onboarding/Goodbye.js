@@ -46,6 +46,9 @@ export default class Goodbye extends React.Component {
     settings.lineHeight = responses.lines_skip ? 4 : 2
     settings.fontSize = responses.text_small ? 3 : 1
     settings.textEnhancements = true
+
+    settings.colorTintBase = responses.color_prefer
+    settings.colorTint = true
     return settings
   }
   componentDidMount() {

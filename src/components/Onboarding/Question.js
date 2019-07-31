@@ -4,6 +4,7 @@ import { Bottom, Container, Top } from '../DyslexiBalance'
 import LetterInput from './LetterInput'
 import LetterCombinationsInput from './LetterCombinationsInput'
 import FontTest from './FontTest'
+import ColorTest from './ColorTest'
 import cx from '../styles'
 
 export default class Question extends React.Component {
@@ -34,6 +35,9 @@ export default class Question extends React.Component {
         break
       case 'FontTest':
         buttons = <FontTest {...this.props} />
+        break
+      case 'ColorTest':
+        buttons = <ColorTest {...this.props} />
         break
       case 'Letters':
         buttons = <LetterInput {...this.props} />
