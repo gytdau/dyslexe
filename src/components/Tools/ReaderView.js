@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Readability from '../../readability'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 import '../../styles/readerview.scss'
 import ReaderViewUnloadable from './ReaderViewUnloadable'
 import Tool from './Tool'
@@ -39,7 +39,7 @@ export default class ReaderView extends Tool {
     }
     return ReactDOM.createPortal(
       <div className={'dyslexi-page'}>
-        <div className={'container ' + styles['text-token']}>{content}</div>
+        <div className={'container ' + cx('text-token')}>{content}</div>
       </div>,
       this.el
     )

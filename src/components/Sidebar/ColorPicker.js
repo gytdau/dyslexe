@@ -2,14 +2,14 @@ import React from 'react'
 import { Alpha } from 'react-color/lib/components/common'
 import { CirclePicker } from 'react-color'
 import '../../styles/picker.scss'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 export default class ColorPicker extends React.Component {
   render() {
     return (
       <>
         <CirclePicker
-          className="mt-4"
+          className={cx('mt-4')}
           color={this.props.appState.colorTintBase}
           onChangeComplete={color => {
             color.a = 0.3
@@ -21,7 +21,7 @@ export default class ColorPicker extends React.Component {
           width="100%"
         />
         {this.props.appState.colorTintBase ? (
-          <div className={styles['alpha-slider-container']}>
+          <div className={cx('alpha-slider-container')}>
             <Alpha
               value={this.props.appState.colorTintBase}
               onChange={color => {

@@ -1,4 +1,4 @@
-import styles from '../styles/app.module.scss'
+import cx from '../components/styles'
 
 let bodyStorage = null
 
@@ -9,7 +9,7 @@ function zap() {
     return
   }
   let body = document.getElementsByTagName('body')[0]
-  body.classList.add(styles['body-loaded'])
+  body.classList.add(cx('body-loaded'))
   storeBodyData()
   deleteBodyNodes()
 }
@@ -18,7 +18,7 @@ function unzap() {
 }
 function storeBodyData() {
   let elements = document.querySelectorAll(
-    'body > *:not(.' + styles['dyslexi-render'] + ')'
+    'body > *:not(.' + cx('dyslexi-render') + ')'
   )
   bodyStorage = []
   elements.forEach(element => bodyStorage.push(element.cloneNode(true)))
@@ -30,7 +30,7 @@ function restoreBodyNodes() {
 }
 function deleteBodyNodes() {
   let elements = document.querySelectorAll(
-    'body > *:not(.' + styles['dyslexi-render'] + ')'
+    'body > *:not(.' + cx('dyslexi-render') + ')'
   )
   elements.forEach(element => element.parentNode.removeChild(element))
 }
@@ -52,19 +52,19 @@ function detectFullscreen(state) {
 
 function removeAllBodyClasses() {
   document
-    .getElementsByClassName(styles['inserted-content'])[0]
-    .classList.remove(styles['sidebar-container'], styles['sidebar-floating'])
+    .getElementsByClassName(cx('inserted-content'))[0]
+    .classList.remove(cx('sidebar-container'), cx('sidebar-floating'))
 }
 function addBodyClasses(state) {
   if (state.step != 'article') {
     return
   }
-  let container = document.getElementsByClassName(styles['inserted-content'])[0]
+  let container = document.getElementsByClassName(cx('inserted-content'))[0]
     .classList
   if (state.sidebar) {
-    container.add(styles['sidebar-container'])
+    container.add(cx('sidebar-container'))
   } else {
-    container.add(styles['sidebar-floating'])
+    container.add(cx('sidebar-floating'))
   }
 }
 function updateReadingTheme(state) {
@@ -73,7 +73,7 @@ function updateReadingTheme(state) {
   detectFullscreen(state)
   var els = document.getElementsByTagName('*')
   for (var i = 0, all = els.length; i < all; i++) {
-    els[i].classList.add(styles['text-token'])
+    els[i].classList.add(cx('text-token'))
   }
 }
 export { removeAllBodyClasses, addBodyClasses, updateReadingTheme }

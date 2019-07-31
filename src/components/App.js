@@ -3,8 +3,7 @@ import ReaderView from './Tools/ReaderView'
 import Onboarding from './Onboarding'
 import Readability from '../readability'
 import Article from './Article'
-import 'bootstrap/dist/css/bootstrap.css'
-import styles from '../styles/app.module.scss'
+import cx from './styles'
 import '../styles/user_adjustments.scss'
 import Sidebar from './Sidebar'
 import * as ManipulationTools from '../scripts/ManipulationTools'
@@ -69,11 +68,7 @@ export default class App extends React.Component {
     switch (this.state.appState.step) {
       case 'onboarding':
         content = (
-          <div
-            className={
-              styles['full-screen-view'] + ' ' + styles['dyslexi-render']
-            }
-          >
+          <div className={cx('full-screen-view', 'dyslexi-render')}>
             <Onboarding setAppState={this.setAppState} />
           </div>
         )

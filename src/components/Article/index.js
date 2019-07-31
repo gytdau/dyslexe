@@ -5,8 +5,8 @@ import Readability from '../../readability'
 import { isProbablyReaderable } from '../../readable'
 import htmlVoidElements from 'html-void-elements'
 import '../../styles/readerview.scss'
+import cx from '../styles'
 
-// TODO: Remove references to chrome, please use parents's state.
 export default class Article extends React.Component {
   constructor(props) {
     super(props)

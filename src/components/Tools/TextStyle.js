@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 const body = document.getElementsByTagName('body')[0]
 
@@ -8,7 +8,7 @@ export default class TextStyle extends React.Component {
   constructor(props) {
     super(props)
     this.el = document.createElement('div')
-    this.el.className += ' ' + styles['dyslexi-render']
+    this.el.className += ' ' + cx('dyslexi-render')
   }
 
   componentDidMount() {
@@ -39,7 +39,7 @@ export default class TextStyle extends React.Component {
     for (var key in style) {
       result += key + ': ' + style[key] + ' !important; '
     }
-    return '.' + styles['text-token'] + ' {' + result + '}'
+    return '.' + cx('text-token') + ' {' + result + '}'
   }
   render() {
     return ReactDOM.createPortal(

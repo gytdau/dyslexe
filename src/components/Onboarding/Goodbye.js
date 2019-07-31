@@ -1,7 +1,7 @@
 import React from 'react'
 import ReaderView from '../Tools/ReaderView'
 import { Bottom, Container, Top } from '../DyslexiBalance'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 export default class Goodbye extends React.Component {
   render() {
@@ -24,9 +24,7 @@ export default class Goodbye extends React.Component {
             mode.
           </p>
           <div
-            className={`btn btn-primary ${styles['btn']} ${
-              styles['btn-primary']
-            }`}
+            className={`btn btn-primary ${cx('btn')} ${cx('btn-primary')}`}
             onClick={this.done.bind(this)}
           >
             <i className="mdi mdi-check" /> Done

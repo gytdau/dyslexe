@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 export default class LetterInput extends React.Component {
   constructor(props) {
@@ -41,25 +41,29 @@ export default class LetterInput extends React.Component {
           another letter, click the button below.
         </p>
         {this.state.letters.map((letter, index) => (
-          <div className={styles['letter-input']} key={index}>
+          <div className={cx('letter-input')} key={index}>
             <input
-              className={`form-control ${styles['form-control']}`}
+              className={`form-control ${cx('form-control')}`}
               maxLength={1}
               onChange={e => this.change(e, index)}
               value={letter}
             />
-            <div className="btn btn-link" onClick={() => this.remove(index)}>
+            <div
+              className={cx('btn', 'btn-link')}
+              onClick={() => this.remove(index)}
+            >
               <i className="mdi mdi-close" /> Remove
             </div>
           </div>
         ))}
-        <div className="btn btn-link size-normal" onClick={this.add}>
+        <div
+          className={cx('btn', 'btn-link', 'size-normal')}
+          onClick={this.add}
+        >
           <i className="mdi mdi-plus" /> Add another letter
         </div>
         <div
-          className={`btn btn-primary ${styles['btn']} ${
-            styles['btn-primary']
-          }`}
+          className={`btn btn-primary ${cx('btn')} ${cx('btn-primary')}`}
           onClick={() => {
             this.props.respond(this.state.letters)
           }}

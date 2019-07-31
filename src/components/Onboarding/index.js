@@ -5,6 +5,7 @@ import questionData from './questionData'
 import Welcome from './Welcome'
 import Goodbye from './Goodbye'
 import Question from './Question'
+import cx from '../styles'
 
 export default class Onboarding extends React.Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 import 'rc-slider/assets/index.css'
 import React from 'react'
 import Select from 'react-select'
+import cx from '../styles'
 
 let fonts = [
   'Arial',

@@ -4,7 +4,7 @@ import { Bottom, Container, Top } from '../DyslexiBalance'
 import LetterInput from './LetterInput'
 import LetterCombinationsInput from './LetterCombinationsInput'
 import FontTest from './FontTest'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 export default class Question extends React.Component {
   render() {
@@ -14,9 +14,7 @@ export default class Question extends React.Component {
         buttons = (
           <div>
             <div
-              className={`btn btn-primary ${styles['btn']} ${
-                styles['btn-primary']
-              }`}
+              className={`btn btn-primary ${cx('btn')} ${cx('btn-primary')}`}
               onClick={() => {
                 this.props.respond(true)
               }}
@@ -24,9 +22,7 @@ export default class Question extends React.Component {
               Yes <i className="mdi mdi-arrow-right" />
             </div>
             <div
-              className={`btn btn-primary ${styles['btn']} ${
-                styles['btn-primary']
-              }`}
+              className={`btn btn-primary ${cx('btn')} ${cx('btn-primary')}`}
               onClick={() => {
                 this.props.respond(false)
               }}
@@ -53,7 +49,7 @@ export default class Question extends React.Component {
           <p>Question {this.props.questionCount}.</p>
           <h1>{this.props.question.text}</h1>
         </Top>
-        <Bottom className="fade-in">{buttons}</Bottom>
+        <Bottom className={cx('fade-in')}>{buttons}</Bottom>
       </Container>
     )
   }

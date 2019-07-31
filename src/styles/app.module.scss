@@ -1,3 +1,4 @@
+@import "bootstrap";
 @import "colors";
 @import "firasans";
 @import "onboarding";
@@ -68,6 +69,9 @@ h6 {
       background: #eee;
     }
   }
+}
+.new-one {
+  opacity: 1;
 }
 .sidebar {
   overflow-y: scroll;

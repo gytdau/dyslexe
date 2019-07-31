@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 export default class FontTest extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class FontTest extends React.Component {
   render() {
     let { choosing } = this.state
     let options = choosing.map(font => (
-      <div className="font-choose">
+      <div className={cx('font-choose')}>
         <p style={{ fontFamily: `${font}, serif` }}>
           Penguins eat krill, fish, squid, and other small animals from the
           ocean, which they catch. They are at home in the ocean. They come up
@@ -38,9 +38,7 @@ export default class FontTest extends React.Component {
           mud.
         </p>
         <div
-          className={`btn btn-primary btn-primary-large ${
-            styles['btn-primary']
-          }`}
+          className={`btn btn-primary btn-primary-large ${cx('btn-primary')}`}
           onClick={() => {
             this.choose(font)
           }}

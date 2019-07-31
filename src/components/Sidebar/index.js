@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 import CloseButton from './CloseButton'
 import ColorPicker from './ColorPicker'
 import DemoNotice from './DemoNotice'
@@ -16,12 +16,12 @@ export default class Sidebar extends React.Component {
   render() {
     console.log(this.props.appState)
     return (
-      <div className={styles['sidebar'] + ' ' + styles['dyslexi-render']}>
-        <div className="list-group list-group-flush">
+      <div className={cx('sidebar', 'dyslexi-render')}>
+        <div className={cx('list-group', 'list-group-flush')}>
           <CloseButton setAppState={this.props.setAppState} />
         </div>
-        <div className={styles['sidebar-content']}>
-          <div className="list-group list-group-flush">
+        <div className={cx('sidebar-content')}>
+          <div className={cx('list-group', 'list-group-flush')}>
             <Group
               label="Text enhancements"
               help="Change how big the text is or how spaced apart it is."

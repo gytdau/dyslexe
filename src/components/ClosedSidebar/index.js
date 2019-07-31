@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 import FloatingButton from './FloatingButton'
 
 export default class ClosedSidebar extends React.Component {
@@ -8,9 +8,7 @@ export default class ClosedSidebar extends React.Component {
   }
   render() {
     return (
-      <div
-        className={styles['sidebar-floating'] + ' ' + styles['dyslexi-render']}
-      >
+      <div className={cx('sidebar-floating', 'dyslexi-render')}>
         <FloatingButton
           icon="settings"
           onClick={() => this.props.setAppState({ sidebar: true })}

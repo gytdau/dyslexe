@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import styles from '../../styles/app.module.scss'
+import cx from '../styles'
 
 const body = document.getElementsByTagName('body')[0]
 
@@ -8,7 +8,7 @@ export default class Tool extends React.Component {
   constructor(props) {
     super(props)
     this.el = document.createElement('div')
-    this.el.className += ' ' + styles['dyslexi-render']
+    this.el.className += ' ' + cx('dyslexi-render')
   }
 
   componentDidMount() {

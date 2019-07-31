@@ -15,6 +15,7 @@
     "bootstrap": "^4.2.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "^2.4.1",
+    "classnames": "^2.2.6",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
