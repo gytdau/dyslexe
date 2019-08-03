@@ -12,8 +12,10 @@ class Content extends React.Component {
   }
 }
 
-// Render the app
-const app = document.createElement('div')
-app.className = cx('inserted-content', 'dyslexi-render')
-document.getElementsByTagName('body')[0].appendChild(app)
-ReactDOM.render(<Content />, app)
+if (document.querySelectorAll('.' + cx('inserted-content')).length == 0) {
+  // Render the app
+  const app = document.createElement('div')
+  app.className = cx('inserted-content', 'dyslexi-render')
+  document.getElementsByTagName('body')[0].appendChild(app)
+  ReactDOM.render(<Content />, app)
+}

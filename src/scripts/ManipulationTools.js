@@ -23,7 +23,9 @@ function storeBodyData() {
   )
   bodyStorage = []
   elements.forEach(element => bodyStorage.push(element.cloneNode(true)))
-  elements = document.querySelectorAll('head > *')
+  elements = document.querySelectorAll(
+    'head > *:not([data-emotion="css"]):not(#react-tooltip)'
+  )
   headStorage = []
   elements.forEach(element => headStorage.push(element.cloneNode(true)))
 }
@@ -40,7 +42,9 @@ function deleteBodyNodes() {
     'body > *:not(.' + cx('dyslexi-render') + ')'
   )
   elements.forEach(element => element.parentNode.removeChild(element))
-  elements = document.querySelectorAll('head > *')
+  elements = document.querySelectorAll(
+    'head > *:not([data-emotion="css"]):not(#react-tooltip)'
+  )
   elements.forEach(element => element.parentNode.removeChild(element))
 }
 function detectFullscreen(state) {
@@ -80,9 +84,18 @@ function updateReadingTheme(state) {
   removeAllBodyClasses()
   addBodyClasses(state)
   detectFullscreen(state)
-  var els = document.getElementsByTagName('*')
-  for (var i = 0, all = els.length; i < all; i++) {
-    els[i].classList.add(cx('text-token'))
-  }
+  let body = document.getElementsByTagName('body')[0]
+  var els = Array.from(body.childNodes)
+  els.forEach(element => {
+    if (!element.classList) {
+      return
+    }
+    if (element.classList.contains(cx('sidebar-container'))) {
+      return
+    }
+    element
+      .querySelectorAll('*')
+      .forEach(element2 => element2.classList.add(cx('text-token')))
+  })
 }
 export { removeAllBodyClasses, addBodyClasses, updateReadingTheme }

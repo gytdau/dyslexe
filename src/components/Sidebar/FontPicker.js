@@ -36,7 +36,18 @@ export default class FontPicker extends React.Component {
       label: this.props.appState.fontChangeFont
     }
     return (
-      <Select options={options} onChange={this.handleChange} value={value} />
+      <Select
+        options={options}
+        onChange={this.handleChange}
+        value={value}
+        menuPortalTarget={document.body}
+        styles={{
+          menuPortal: base => {
+            const { zIndex, ...rest } = base // remove zIndex from base by destructuring
+            return { ...rest, zIndex: 99999999999 }
+          }
+        }}
+      />
     )
   }
 }
