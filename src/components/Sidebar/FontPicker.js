@@ -30,6 +30,21 @@ export default class FontPicker extends React.Component {
     this.props.setAppState({ fontChangeFont: selectedOption.value })
     console.log(`Option selected:`, selectedOption)
   }
+  colorStyles() {
+    return {
+      menuPortal: base => {
+        const { zIndex, ...rest } = base // remove zIndex from base by destructuring
+        return { ...rest, zIndex: 99999999999 }
+      },
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+        return {
+          ...styles,
+          fontFamily: data.value
+        }
+      },
+      singleValue: (styles, { data }) => ({ ...styles, fontFamily: data.value })
+    }
+  }
   render() {
     let value = {
       value: this.props.appState.fontChangeFont,
@@ -41,12 +56,7 @@ export default class FontPicker extends React.Component {
         onChange={this.handleChange}
         value={value}
         menuPortalTarget={document.body}
-        styles={{
-          menuPortal: base => {
-            const { zIndex, ...rest } = base // remove zIndex from base by destructuring
-            return { ...rest, zIndex: 99999999999 }
-          }
-        }}
+        styles={this.colorStyles()}
       />
     )
   }

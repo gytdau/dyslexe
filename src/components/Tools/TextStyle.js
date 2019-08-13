@@ -22,6 +22,7 @@ export default class TextStyle extends React.Component {
     const fontSizes = ['8pt', '12pt', '14pt', '18pt', '20pt']
     const lineHeights = [1.5, 2, 2.5, 3, 3.5]
     let style = {}
+    let seperatorStyle = {}
     if (this.props.appState.textEnhancements) {
       Object.assign(style, {
         'font-size': fontSizes[this.props.appState.textSize - 1],
@@ -34,12 +35,27 @@ export default class TextStyle extends React.Component {
           '"' + this.props.appState.fontChangeFont + '", sans-serif'
       })
     }
+    if (this.props.appState.syllables) {
+      seperatorStyle = {
+        display: 'inline-block'
+      }
+    } else {
+      seperatorStyle = {
+        display: 'none'
+      }
+    }
     // Generate CSS
     let result = ''
     for (var key in style) {
       result += key + ': ' + style[key] + ' !important; '
     }
-    return '.' + cx('text-token') + ' {' + result + '}'
+    let seperatorResult = ''
+    for (var key in seperatorStyle) {
+      seperatorResult += key + ': ' + seperatorStyle[key] + ' !important; '
+    }
+    return `.${cx('text-token')} {${result}}\n.${cx(
+      'sep'
+    )} {${seperatorResult}}`
   }
   render() {
     return ReactDOM.createPortal(

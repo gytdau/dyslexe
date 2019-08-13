@@ -3,7 +3,13 @@ import cx from '../styles'
 
 export default class TestAgain extends React.Component {
   testAgain() {
-    this.props.setAppState({ step: 'onboarding', testingAgain: true })
+    this.props.setAppState({
+      step: 'onboarding',
+      testingAgain: true,
+      colorTint: false,
+      textEnhancements: false,
+      fontChange: false
+    })
   }
   render() {
     return (

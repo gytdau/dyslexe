@@ -5,6 +5,8 @@ import cx from '../styles'
 import '../../styles/readerview.scss'
 import ReaderViewUnloadable from './ReaderViewUnloadable'
 import Tool from './Tool'
+import hyphenateNode from './Syllables'
+import $ from 'jquery'
 
 const body = document.getElementsByTagName('body')[0]
 
@@ -30,10 +32,15 @@ export default class ReaderView extends Tool {
     if (this.state.content == '') {
       content = <ReaderViewUnloadable />
     } else {
+      setTimeout(() => {
+        console.log('This is the newContent', this.state.newContent)
+        $('#okay').html(this.state.newContent)
+      }, 500)
+
       content = (
         <div>
           <h1>{this.state.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
+          <div id="okay"></div>
         </div>
       )
     }
@@ -53,11 +60,13 @@ export default class ReaderView extends Tool {
       return
     }
     let article = new Readability(this.props.article_document).parse()
+    let newContent = hyphenateNode($.parseHTML(article.content)[0])
 
     this.setState({
       loading: false,
       title: article.title,
-      content: article.content
+      content: article.content,
+      newContent
     })
   }
 }

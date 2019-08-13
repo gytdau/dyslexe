@@ -10,34 +10,36 @@ export default class ColorPicker extends React.Component {
       <>
         <CirclePicker
           className={cx('mt-4')}
-          color={this.props.appState.colorTintBase}
+          color={this.props.appState[this.props.propertyName]}
           onChangeComplete={color => {
             color.a = 0.3
             color.hsl.a = color.a
             color.hsv.a = color.a
             color.rgb.a = color.a
-            this.props.setAppState({ colorTintBase: color })
+            this.props.setAppState({ [this.props.propertyName]: color })
             console.log(JSON.stringify(color))
           }}
           width="100%"
         />
-        {this.props.appState.colorTintBase ? (
+        {this.props.appState[this.props.propertyName] ? (
           <div className={cx('alpha-slider-container')}>
             <Alpha
-              value={this.props.appState.colorTintBase}
+              value={this.props.appState[this.props.propertyName]}
               onChange={color => {
-                let { colorTintBase } = this.props.appState
+                let colorTintBase = this.props.appState[this.props.propertyName]
                 colorTintBase.a = color.a
                 colorTintBase.hsl.a = color.a
                 colorTintBase.hsv.a = color.a
                 colorTintBase.rgb.a = color.a
-                this.props.setAppState({ colorTintBase })
+                this.props.setAppState({
+                  [this.props.propertyName]: colorTintBase
+                })
               }}
               radius="10px"
               shadow={0}
               direction="horizontal"
               height="15px"
-              {...this.props.appState.colorTintBase}
+              {...this.props.appState[this.props.propertyName]}
             />
           </div>
         ) : null}

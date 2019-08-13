@@ -10,6 +10,7 @@ import * as ManipulationTools from '../scripts/ManipulationTools'
 import ClosedSidebar from './ClosedSidebar'
 import ColorTint from './Tools/ColorTint'
 import TextStyle from './Tools/TextStyle'
+import LineFocus from './Tools/LineFocus'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -106,6 +107,7 @@ export default class App extends React.Component {
         {content}
         <ColorTint appState={this.state.appState} />
         <TextStyle appState={this.state.appState} />
+        <LineFocus appState={this.state.appState} />
       </>
     )
   }

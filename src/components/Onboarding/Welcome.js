@@ -8,11 +8,11 @@ export default class Welcome extends React.Component {
     return (
       <Container>
         <Top>
-          <h1>Welcome to Dyslex E</h1>
+          <h1>Welcome to Dyslex.ie</h1>
         </Top>
         <Bottom>
           <p>
-            Dyslex E can help you read articles faster and more comfortably.
+            Dyslex.ie can help you read articles faster and more comfortably.
           </p>
           <p>
             To get started, let's go through a short questionnaire so that we

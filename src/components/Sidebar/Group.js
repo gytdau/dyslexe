@@ -20,11 +20,17 @@ export default class Group extends React.Component {
             </h5>
             <Switch
               checked={this.props.appState[this.props.switch]}
-              onChange={() =>
+              onChange={() => {
+                let extra = this.props.switchOff
+                  ? {
+                      [this.props.switchOff]: false
+                    }
+                  : {}
                 this.props.setAppState({
+                  ...extra,
                   [this.props.switch]: !this.props.appState[this.props.switch]
                 })
-              }
+              }}
               onColor="#86d3ff"
               onHandleColor="#2693e6"
               handleDiameter={30}

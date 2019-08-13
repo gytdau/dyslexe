@@ -23,6 +23,14 @@ export default class ClosedSidebar extends React.Component {
             })
           }
         />
+        <FloatingButton
+          icon={'close'}
+          onClick={() => {
+            chrome.storage.sync.set({ enabled: false }, () => {
+              location.reload()
+            })
+          }}
+        />
       </div>
     )
   }

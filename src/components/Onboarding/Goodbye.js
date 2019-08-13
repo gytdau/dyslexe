@@ -14,7 +14,7 @@ export default class Goodbye extends React.Component {
           <p>To finish, press Done.</p>
           <p>
             We've made a reading view specifically for you. To try it out, try
-            going to an article and pressing on the Dyslex E icon on your
+            going to an article and pressing on the Dyslex.ie icon on your
             browser.
           </p>
           <p>
@@ -39,17 +39,18 @@ export default class Goodbye extends React.Component {
     })
   }
   processResults(responses) {
-    let settings = {}
-    settings.fontChangeFont = responses.font_prefer
-    settings.fontChange = true
-
-    settings.lineHeight = responses.lines_skip ? 4 : 2
-    settings.fontSize = responses.text_small ? 3 : 1
-    settings.textEnhancements = true
-
-    settings.colorTintBase = responses.color_prefer
-    settings.colorTint = true
-    return settings
+    return {
+      fontChangeFont: responses.font_prefer,
+      fontChange: true,
+      lineHeight: responses.lines_skip ? 4 : 2,
+      fontSize: responses.text_small ? 3 : 1,
+      textEnhancements: true,
+      colorTintBase: responses.color_prefer,
+      backgroundTintBase: responses.color_prefer,
+      backgroundTint: false,
+      colorTint: true,
+      lineFocus: false
+    }
   }
   componentDidMount() {
     let {

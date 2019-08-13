@@ -3,6 +3,10 @@ import cx from '../components/styles'
 let bodyStorage = null
 let headStorage = null
 
+const headSelector =
+  'head > *:not([data-emotion="css"]):not(#react-tooltip):not([rel="icon"]):not([rel="shortcut icon"]):not(title)'
+const bodySelector = 'body > *:not(.' + cx('dyslexi-render') + ')'
+
 // FULLSCREEN
 function zap() {
   console.log('Zapping has occured.')
@@ -18,14 +22,10 @@ function unzap() {
   restoreBodyNodes()
 }
 function storeBodyData() {
-  let elements = document.querySelectorAll(
-    'body > *:not(.' + cx('dyslexi-render') + ')'
-  )
+  let elements = document.querySelectorAll(bodySelector)
   bodyStorage = []
   elements.forEach(element => bodyStorage.push(element.cloneNode(true)))
-  elements = document.querySelectorAll(
-    'head > *:not([data-emotion="css"]):not(#react-tooltip)'
-  )
+  elements = document.querySelectorAll(headSelector)
   headStorage = []
   elements.forEach(element => headStorage.push(element.cloneNode(true)))
 }
@@ -38,14 +38,12 @@ function restoreBodyNodes() {
   headStorage = null
 }
 function deleteBodyNodes() {
-  let elements = document.querySelectorAll(
-    'body > *:not(.' + cx('dyslexi-render') + ')'
-  )
-  elements.forEach(element => element.parentNode.removeChild(element))
-  elements = document.querySelectorAll(
-    'head > *:not([data-emotion="css"]):not(#react-tooltip)'
-  )
-  elements.forEach(element => element.parentNode.removeChild(element))
+  document
+    .querySelectorAll(bodySelector)
+    .forEach(element => element.parentNode.removeChild(element))
+  document
+    .querySelectorAll(headSelector)
+    .forEach(element => element.parentNode.removeChild(element))
 }
 function detectFullscreen(state) {
   if (state.step == 'onboarding') {

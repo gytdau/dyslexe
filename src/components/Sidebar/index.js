@@ -58,12 +58,51 @@ export default class Sidebar extends React.Component {
               <FontPicker {...this.props} />
             </Group>
             <Group
-              help="Add a light transparent color to the entire page."
+              help="Only show a couple of lines at a time."
+              label="Line focus"
+              {...this.props}
+              switch="lineFocus"
+            >
+              <PropertySlider
+                valueName="lineFocusHeight"
+                value={this.props.appState.lineHeight}
+                setAppState={this.props.setAppState}
+                label={
+                  <span>
+                    <i className="mdi mdi-text" /> Focus height
+                  </span>
+                }
+              />
+            </Group>
+            <Group
+              help="Show small dots between every syllable"
+              label="Split up syllables"
+              {...this.props}
+              switch="syllables"
+            >
+              {this.props.appState.fullscreen ? null : (
+                <span className={cx('text-muted')}>
+                  Turn on full screen mode to use this feature.
+                </span>
+              )}
+            </Group>
+            <Group
+              help="Add a light transparent color to the entire page, which affects the background color and the text color."
               label="Color tint"
               {...this.props}
               switch="colorTint"
+              switchOff="backgroundTint"
             >
-              <ColorPicker {...this.props} />
+              <ColorPicker {...this.props} propertyName="colorTintBase" />
+            </Group>
+            <Group
+              help="Change the background color without affecting the text color."
+              label="Background tint"
+              {...this.props}
+              switch="backgroundTint"
+              switchOff="colorTint"
+            >
+              <ColorPicker {...this.props} propertyName="backgroundTintBase" />
             </Group>
             <TestAgain {...this.props} />
             <DemoNotice />
