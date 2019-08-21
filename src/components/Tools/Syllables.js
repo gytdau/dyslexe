@@ -1,14 +1,51 @@
-const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi
+import htmlVoidElements from 'html-void-elements'
+import React from 'react'
 import cx from '../styles'
-import $ from 'jquery'
+import WordDefinition from './WordDefinition'
 
-const HYPHEN = '•'
-const STARTWORD = 'Չ'
-const ENDWORD = 'Ո'
-const markerMapping = {
-  [HYPHEN]: '<span class="' + cx('sep') + '">•</span>',
-  [STARTWORD]: '<span class="' + cx('word') + '">',
-  [ENDWORD]: '</span>'
+const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi
+let activeWord = ''
+let id = 0
+function wordHighlighted(word) {
+  //word = word.toLowerCase().replace(/[^a-z]/gi, '')
+  console.log('You clicked', word)
+  if (activeWord == word) {
+    activeWord = ''
+  } else {
+    activeWord = word
+  }
+}
+function tokenify(text, highlightCallback, isHighlighted) {
+  text = text.trim().split(/\s+/)
+  return text.map(token => {
+    id += 1
+    if (isHighlighted(id)) {
+      return (
+        <WordDefinition
+          id={id}
+          onClick={e => {
+            highlightCallback(e.target.id)
+            wordHighlighted(e.target.id)
+          }}
+          text={token}
+        >
+          {hyphenateText(token)}
+        </WordDefinition>
+      )
+    }
+    return React.createElement(
+      'span',
+      {
+        className: isHighlighted(id) ? cx('word', 'highlighted') : cx('word'),
+        id,
+        onClick: e => {
+          highlightCallback(e.target.id)
+          wordHighlighted(e.target.id)
+        }
+      },
+      hyphenateText(token)
+    )
+  })
 }
 
 function hyphenateText(text) {
@@ -16,40 +53,95 @@ function hyphenateText(text) {
   let newWords = words.map(word => {
     let syllables = word.match(syllableRegex)
     if (syllables) {
-      return STARTWORD + syllables.join(HYPHEN) + ENDWORD
+      syllables = syllables.map(syllable =>
+        React.createElement('span', { className: cx('part') }, syllable)
+      )
+      syllables = intersperse(
+        syllables,
+        React.createElement('span', { className: cx('sep', 'part') }, '•')
+      )
+
+      syllables.push(React.createElement('span', null, ' '))
+      return syllables
     } else {
-      return word
+      return React.createElement('span', null, word)
     }
   })
-  return newWords.join(' ')
+  return newWords
 }
-
-function walkTheDOM(node, func) {
-  func(node)
-  node = node.firstChild
-  while (node) {
-    walkTheDOM(node, func)
-    node = node.nextSibling
+function intersperse(arr, val) {
+  arr = arr.reduce(
+    (acc, next) => {
+      acc.push(next)
+      acc.push(val)
+      return acc
+    },
+    [val]
+  )
+  arr.shift()
+  arr.pop()
+  return arr
+}
+function recursivelyBuildArticleText(
+  element,
+  key,
+  shouldTokenify,
+  highlightCallback,
+  isHighlighted
+) {
+  if (element.nodeType == 3) {
+    if (shouldTokenify) {
+      return tokenify(element.nodeValue, highlightCallback, isHighlighted)
+    }
+    return element.nodeValue + ' '
   }
-}
-
-export default function hyphenateNode(newContent) {
-  walkTheDOM(newContent, function(node) {
-    if (node.nodeType === 3) {
-      // Is it a Text node?
-      var text = node.data.trim()
-      if (text.length > 0) {
-        // Does it have non white-space text content?
-        node.data = hyphenateText(node.data)
-      }
-    }
-  })
-  newContent = $(newContent).html()
-  for (let marker in markerMapping) {
-    newContent = newContent.replace(
-      new RegExp(marker, 'g'),
-      markerMapping[marker]
+  if (shouldTokenify) {
+    shouldTokenify = !(element.tagName == 'A')
+  }
+  let children = Array.from(element.childNodes).map(el => {
+    id += 1
+    return recursivelyBuildArticleText(
+      el,
+      key,
+      shouldTokenify,
+      highlightCallback,
+      isHighlighted
     )
+  })
+
+  let convertedAttributes = {}
+  let attributes = element.attributes
+  if (attributes) {
+    for (var i = 0; i < attributes.length; i++) {
+      convertedAttributes[attributes[i].nodeName] = attributes[i].nodeValue
+    }
   }
-  return newContent
+  if (!element.tagName) {
+    return null
+  }
+  if (htmlVoidElements.includes(element.tagName.toLowerCase())) {
+    return null
+  }
+
+  return React.createElement(
+    element.tagName.toLowerCase(),
+    convertedAttributes,
+    children
+  )
+}
+export default function buildArticleText(
+  element,
+  key,
+  shouldTokenify,
+  highlightCallback,
+  isHighlighted
+) {
+  id = 0
+  return recursivelyBuildArticleText(
+    element,
+    key,
+    shouldTokenify,
+    highlightCallback,
+    isHighlighted
+  )
 }

@@ -69,6 +69,8 @@ export default class Article extends React.Component {
     )
   }
   componentDidMount() {
+    console.log('COMPONENT MOUNT')
+    console.log(this.props.article_document)
     if (!isProbablyReaderable(this.props.article_document)) {
       this.setState({
         loading: false,
@@ -76,6 +78,7 @@ export default class Article extends React.Component {
       })
       return
     }
+    console.log('COMPONENT PASS')
     let article = new Readability(this.props.article_document).parse()
 
     var wrapper = document.createElement('div')

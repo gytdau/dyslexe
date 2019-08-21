@@ -5,8 +5,8 @@ import cx from '../styles'
 import '../../styles/readerview.scss'
 import ReaderViewUnloadable from './ReaderViewUnloadable'
 import Tool from './Tool'
-import hyphenateNode from './Syllables'
-import $ from 'jquery'
+import recursivelyBuildArticleText from './Syllables'
+import ReactTooltip from 'react-tooltip'
 
 const body = document.getElementsByTagName('body')[0]
 
@@ -16,8 +16,27 @@ export default class ReaderView extends Tool {
     this.state = {
       loading: true,
       content: '',
-      title: ''
+      title: '',
+      highlighted: null
     }
+    this.highlightCallback = this.highlightCallback.bind(this)
+  }
+  highlightCallback(word) {
+    if (this.state.highlighted == word) {
+      this.setState({ highlighted: null })
+      console.log('DISABLE HIGHLIGHT.', word)
+    } else {
+      this.setState({ highlighted: word })
+      console.log('ENABLE HIGHLIGHT.', word)
+    }
+    let newContent = recursivelyBuildArticleText(
+      this.state.content,
+      0,
+      true,
+      this.highlightCallback,
+      x => x == this.state.highlighted
+    )
+    this.setState({ newContent })
   }
   render() {
     let content = null
@@ -32,15 +51,10 @@ export default class ReaderView extends Tool {
     if (this.state.content == '') {
       content = <ReaderViewUnloadable />
     } else {
-      setTimeout(() => {
-        console.log('This is the newContent', this.state.newContent)
-        $('#okay').html(this.state.newContent)
-      }, 500)
-
       content = (
         <div>
           <h1>{this.state.title}</h1>
-          <div id="okay"></div>
+          {this.state.newContent}
         </div>
       )
     }
@@ -60,12 +74,24 @@ export default class ReaderView extends Tool {
       return
     }
     let article = new Readability(this.props.article_document).parse()
-    let newContent = hyphenateNode($.parseHTML(article.content)[0])
 
+    var wrapper = document.createElement('div')
+    wrapper.innerHTML = article.content
+    var div = wrapper.firstChild
+    console.log('Wrapper looks like', wrapper)
+    console.log('div looks like', div)
+
+    let newContent = recursivelyBuildArticleText(
+      div,
+      0,
+      true,
+      this.highlightCallback,
+      x => x == this.state.highlighted
+    )
     this.setState({
       loading: false,
       title: article.title,
-      content: article.content,
+      content: div,
       newContent
     })
   }

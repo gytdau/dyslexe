@@ -163,6 +163,9 @@ h6 {
 .sep {
   opacity: 0.3;
 }
+.part {
+  pointer-events: none;
+}
 .word {
   &:hover {
     background-color: lighten(#ffdc00, 20);
