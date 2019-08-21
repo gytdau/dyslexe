@@ -11,6 +11,7 @@ import ClosedSidebar from './ClosedSidebar'
 import ColorTint from './Tools/ColorTint'
 import TextStyle from './Tools/TextStyle'
 import LineFocus from './Tools/LineFocus'
+import OutroFormView from './Tools/OutroFormView'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -67,6 +68,9 @@ export default class App extends React.Component {
       return content
     }
     switch (this.state.appState.step) {
+      case 'outroForm':
+        content = <OutroFormView setAppState={this.setAppState} />
+        return <>{content}</>
       case 'onboarding':
         content = (
           <div className={cx('full-screen-view', 'dyslexi-render')}>

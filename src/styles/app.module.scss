@@ -165,7 +165,7 @@ h6 {
 }
 .word {
   &:hover {
-    background-color: red;
+    background-color: lighten(#ffdc00, 20);
   }
   cursor: pointer;
   margin-left: 0.1em;

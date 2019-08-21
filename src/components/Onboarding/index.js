@@ -6,6 +6,7 @@ import Welcome from './Welcome'
 import Goodbye from './Goodbye'
 import Question from './Question'
 import cx from '../styles'
+import IntroForm from './IntroForm'
 
 export default class Onboarding extends React.Component {
   constructor(props) {
@@ -54,7 +55,20 @@ export default class Onboarding extends React.Component {
     if (this.state.page == 0) {
       return <Welcome respond={this.next} ready={true} />
     }
+    if (this.state.page == 1) {
+      return <IntroForm respond={this.next} ready={true} />
+    }
     if (this.state.page == 2) {
+      return (
+        <Question
+          key={this.state.questionCount}
+          respond={this.respond}
+          question={questionData[this.state.question]}
+          questionCount={this.state.questionCount}
+        />
+      )
+    }
+    if (this.state.page == 3) {
       return (
         <Goodbye
           setAppState={this.props.setAppState}

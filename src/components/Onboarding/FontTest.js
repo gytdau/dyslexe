@@ -38,7 +38,7 @@ export default class FontTest extends React.Component {
           mud.
         </p>
         <div
-          className={`btn btn-primary btn-primary-large ${cx('btn-primary')}`}
+          className={`${cx('btn', 'btn-primary', 'btn-primary-large')}`}
           onClick={() => {
             this.choose(font)
           }}

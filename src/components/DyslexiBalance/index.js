@@ -1,9 +1,5 @@
-import Bottom from './Bottom';
-import Container from './Container';
-import Top from './Top';
+import Bottom from './Bottom'
+import Container from './Container'
+import Top from './Top'
 
-export { // without default
-    Bottom,
-    Container,
-    Top
-}
+export { Bottom, Container, Top }

@@ -1,0 +1,3 @@
+GET request:
+
+https://simple.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=insight

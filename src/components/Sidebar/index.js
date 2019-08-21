@@ -65,11 +65,12 @@ export default class Sidebar extends React.Component {
             >
               <PropertySlider
                 valueName="lineFocusHeight"
-                value={this.props.appState.lineHeight}
+                value={this.props.appState.lineFocusHeight}
                 setAppState={this.props.setAppState}
                 label={
                   <span>
-                    <i className="mdi mdi-text" /> Focus height
+                    <i className="mdi mdi-arrow-split-horizontal" /> Size of
+                    clear area
                   </span>
                 }
               />
@@ -105,7 +106,7 @@ export default class Sidebar extends React.Component {
               <ColorPicker {...this.props} propertyName="backgroundTintBase" />
             </Group>
             <TestAgain {...this.props} />
-            <DemoNotice />
+            <DemoNotice {...this.props} />
           </div>
         </div>
         <ReactTooltip />
