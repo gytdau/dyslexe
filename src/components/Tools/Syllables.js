@@ -16,6 +16,9 @@ function tokenify(text, highlightCallback, isHighlighted) {
           onClick={e => {
             highlightCallback(e.target.id)
           }}
+          onClickOutside={() => {
+            highlightCallback()
+          }}
           text={token}
         >
           {hyphenateText(token)}

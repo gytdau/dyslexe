@@ -14,6 +14,7 @@ export default class WordDefinition extends React.Component {
     }
   }
   render() {
+    let onMouseOut = this.props.onMouseOut
     return (
       <>
         <Popover
