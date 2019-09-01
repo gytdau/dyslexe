@@ -49,7 +49,8 @@ export default class Goodbye extends React.Component {
       backgroundTintBase: responses.color_prefer,
       backgroundTint: false,
       colorTint: true,
-      lineFocus: false
+      lineFocus: false,
+      lineFocusHeight: 1
     }
   }
   componentDidMount() {
