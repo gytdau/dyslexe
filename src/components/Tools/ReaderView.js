@@ -22,21 +22,21 @@ export default class ReaderView extends Tool {
     this.highlightCallback = this.highlightCallback.bind(this)
   }
   highlightCallback(word) {
-    if (this.state.highlighted == word) {
-      this.setState({ highlighted: null })
-      console.log('DISABLE HIGHLIGHT.', word)
-    } else {
-      this.setState({ highlighted: word })
-      console.log('ENABLE HIGHLIGHT.', word)
+    let next = () => {
+      let newContent = recursivelyBuildArticleText(
+        this.state.content,
+        0,
+        true,
+        this.highlightCallback,
+        x => x == this.state.highlighted
+      )
+      this.setState({ newContent })
     }
-    let newContent = recursivelyBuildArticleText(
-      this.state.content,
-      0,
-      true,
-      this.highlightCallback,
-      x => x == this.state.highlighted
-    )
-    this.setState({ newContent })
+    if (this.state.highlighted == word) {
+      this.setState({ highlighted: null }, next)
+    } else {
+      this.setState({ highlighted: word }, next)
+    }
   }
   render() {
     let content = null

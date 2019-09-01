@@ -38,3 +38,42 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     })
   }
 })
+
+function getData(results) {
+  console.log('Hey, looks like...')
+  console.log(results)
+  let pages = results.query.pages
+  return pages[Object.keys(pages)[0]]
+}
+function makeRequest(simple, text, callback) {
+  var xhr = new XMLHttpRequest()
+  let language = simple ? 'simple' : 'en'
+  xhr.open(
+    'GET',
+    'https://' +
+      language +
+      '.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=' +
+      text,
+    true
+  )
+  xhr.send()
+
+  xhr.onload = () => {
+    let results = getData(JSON.parse(xhr.responseText))
+    if (results.missing == '' && simple) {
+      makeRequest(false, text, callback)
+      //callback(results)
+    } else {
+      callback(results)
+    }
+  }
+}
+chrome.runtime.onMessage.addListener(function(request, sender, callback) {
+  console.log(
+    sender.tab
+      ? 'from a content script:' + sender.tab.url
+      : 'from the extension'
+  )
+  makeRequest(true, request.text, callback)
+  return true
+})

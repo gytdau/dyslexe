@@ -4,20 +4,10 @@ import cx from '../styles'
 import WordDefinition from './WordDefinition'
 
 const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi
-let activeWord = ''
 let id = 0
-function wordHighlighted(word) {
-  //word = word.toLowerCase().replace(/[^a-z]/gi, '')
-  console.log('You clicked', word)
-  if (activeWord == word) {
-    activeWord = ''
-  } else {
-    activeWord = word
-  }
-}
 function tokenify(text, highlightCallback, isHighlighted) {
   text = text.trim().split(/\s+/)
-  return text.map(token => {
+  text = text.map(token => {
     id += 1
     if (isHighlighted(id)) {
       return (
@@ -25,7 +15,6 @@ function tokenify(text, highlightCallback, isHighlighted) {
           id={id}
           onClick={e => {
             highlightCallback(e.target.id)
-            wordHighlighted(e.target.id)
           }}
           text={token}
         >
@@ -40,12 +29,16 @@ function tokenify(text, highlightCallback, isHighlighted) {
         id,
         onClick: e => {
           highlightCallback(e.target.id)
-          wordHighlighted(e.target.id)
         }
       },
       hyphenateText(token)
     )
   })
+  text = intersperse(
+    text,
+    React.createElement('span', { className: cx('space') }, ' ')
+  )
+  return text
 }
 
 function hyphenateText(text) {
@@ -60,8 +53,6 @@ function hyphenateText(text) {
         syllables,
         React.createElement('span', { className: cx('sep', 'part') }, '•')
       )
-
-      syllables.push(React.createElement('span', null, ' '))
       return syllables
     } else {
       return React.createElement('span', null, word)

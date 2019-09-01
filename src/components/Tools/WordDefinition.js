@@ -1,8 +1,11 @@
 import htmlVoidElements from 'html-void-elements'
 import React from 'react'
 import cx from '../styles'
-import ReactTooltip from 'react-tooltip'
+import Popover, { ArrowContainer } from 'react-tiny-popover'
+
 import Axios from 'axios'
+import BeatLoader from 'react-spinners/BeatLoader'
+
 export default class WordDefinition extends React.Component {
   constructor(props) {
     super(props)
@@ -13,37 +16,45 @@ export default class WordDefinition extends React.Component {
   render() {
     return (
       <>
-        <ReactTooltip
-          place="bottom"
-          type="dark"
-          effect="float"
-          id="wordDefinition"
-        />
-        <span
-          className={cx('highlighted')}
+        <Popover
+          isOpen={true}
+          position={'bottom'}
+          padding={0}
           {...this.props}
-          data-tip="Material is..."
-          data-for="wordDefinition"
+          content={({ position, targetRect, popoverRect }) => (
+            <ArrowContainer
+              position={position}
+              targetRect={targetRect}
+              popoverRect={popoverRect}
+              arrowSize={10}
+              arrowStyle={{ margin: '1em' }}
+              arrowColor={'#e4e4e4'}
+            >
+              <div className={cx('definition-inner')}>
+                {this.state.definition ? (
+                  <div>
+                    {this.state.definition.missing == '' ? (
+                      <h3 className={cx('text-center')}>No definition found</h3>
+                    ) : (
+                      <p>{this.state.definition.extract}</p>
+                    )}
+                  </div>
+                ) : (
+                  <BeatLoader />
+                )}
+              </div>
+            </ArrowContainer>
+          )}
         >
-          {this.props.children}
-        </span>
+          <span className={cx('highlighted')}>{this.props.children}</span>
+        </Popover>
       </>
     )
   }
   componentDidMount() {
     let text = this.props.text.toLowerCase().replace(/[^a-z]/gi, '')
-    Axios.get('https://simple.wikipedia.org/w/api.php', {
-      params: {
-        format: 'json',
-        action: 'query',
-        prop: 'extracts',
-        exintro: 'true',
-        explaintext: 'true',
-        redirects: '1',
-        titles: text
-      }
-    }).then(result => {
-      console.log(result)
+    chrome.runtime.sendMessage({ text }, response => {
+      this.setState({ definition: response })
     })
   }
 }
