@@ -8,11 +8,7 @@ import axios from 'axios'
 export default class OutroFormView extends Tool {
   constructor(props) {
     super(props)
-    this.state = {
-      email: '',
-      password: '',
-      checkbox: ''
-    }
+    this.state = {}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.submit = this.submit.bind(this)
   }
@@ -27,41 +23,49 @@ export default class OutroFormView extends Tool {
         </p>
         <form>
           <div className={cx('form-group')}>
-            <label for="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
+            <label>
+              How has your experience of reading changed with Dyslex.ie?
+            </label>
+            <select
               className={cx('form-control')}
-              name="email"
-              placeholder="Enter email"
-              value={this.props.email}
+              id="change"
+              rows="3"
+              name="change"
+              value={this.props.change}
               onChange={this.handleInputChange}
-            />
-            <small id="emailHelp" className={cx('form-text', 'text-muted')}>
-              We'll never share your email with anyone else.
-            </small>
+              required
+            >
+              <option>Select...</option>
+              <option value="much-worse">Got much worse</option>
+              <option value="a-little-worse">Got a little worse</option>
+              <option value="stayed-the-same">Stayed the same</option>
+              <option value="a-little-better">Got a little better</option>
+              <option value="much-better">Got much better</option>
+            </select>
           </div>
           <div className={cx('form-group')}>
-            <label for="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              className={cx('form-control')}
-              name="password"
-              placeholder="Password"
-              value={this.props.password}
-              onChange={this.handleInputChange}
-            />
-          </div>
-          <div className={cx('form-check')}>
-            <input
-              type="checkbox"
-              className={cx('form-check-input')}
-              name="checkbox"
-              value={this.props.checkbox}
-              onChange={this.handleInputChange}
-            />
-            <label className={cx('form-check-label')} for="exampleCheck1">
-              Check me out
+            <label>
+              Would you be willing to pay for Dyslex.ie? If so, how much?
             </label>
+            <textarea
+              className={cx('form-control')}
+              id="payments"
+              rows="3"
+              name="payments"
+              value={this.props.payments}
+              onChange={this.handleInputChange}
+            ></textarea>
+          </div>
+          <div className={cx('form-group')}>
+            <label>Which part of Dyslex.ie did you not like the most?</label>
+            <textarea
+              className={cx('form-control')}
+              id="feedback"
+              rows="3"
+              name="feedback"
+              value={this.props.feedback}
+              onChange={this.handleInputChange}
+            ></textarea>
           </div>
           <div onClick={this.submit} className={cx('btn', 'btn-primary')}>
             Submit
@@ -87,7 +91,7 @@ export default class OutroFormView extends Tool {
   }
   submit() {
     axios
-      .post('https://dyslexie-7ab5a.firebaseio.com/responses.json', this.state)
+      .post('https://dyslexie-7ab5a.firebaseio.com/outro.json', this.state)
       .then(() => {
         this.props.setAppState({ step: 'article' })
       })
