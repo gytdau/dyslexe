@@ -26,12 +26,12 @@ export default class Article extends React.Component {
     this.wordHighlighted = this.wordHighlighted.bind(this)
   }
   render() {
-    let content = null
     if (this.state.loading) {
-      content = <p>One second...</p>
       return (
         <div className={'dyslexi-page'}>
-          <div className={'container'}>{content}</div>
+          <div className={'container'}>
+            <p>One second...</p>
+          </div>
         </div>
       )
     }
@@ -62,11 +62,6 @@ export default class Article extends React.Component {
         </Container>
       )
     }
-    return (
-      <div className={'dyslexi-page'}>
-        <div className={'container'}>{content}</div>
-      </div>
-    )
   }
   componentDidMount() {
     if (!isProbablyReaderable(this.props.article_document)) {
