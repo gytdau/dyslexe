@@ -12,6 +12,7 @@ export default class WordDefinition extends React.Component {
           isOpen={true}
           position={'bottom'}
           padding={0}
+          containerStyle={{ overflow: 'visible' }}
           {...this.props}
           content={({ position, targetRect, popoverRect }) => (
             <ArrowContainer
@@ -36,7 +37,7 @@ export default class WordDefinition extends React.Component {
             </ArrowContainer>
           )}
         >
-          <span onMouseOut={this.props.onClickOutside}>
+          <span className={cx('word')} onMouseOut={this.props.onClickOutside}>
             {this.props.children}
           </span>
         </Popover>
