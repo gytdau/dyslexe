@@ -27,7 +27,6 @@ export default class ColorTest extends React.Component {
   }
   render() {
     let { choosing } = this.state
-    console.log(choosing)
     let options = choosing.map(color => (
       <div className={cx('font-choose')}>
         <p

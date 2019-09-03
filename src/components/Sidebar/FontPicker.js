@@ -28,7 +28,6 @@ export default class FontPicker extends React.Component {
   }
   handleChange(selectedOption) {
     this.props.setAppState({ fontChangeFont: selectedOption.value })
-    console.log(`Option selected:`, selectedOption)
   }
   colorStyles() {
     return {

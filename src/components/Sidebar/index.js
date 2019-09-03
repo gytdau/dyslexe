@@ -13,7 +13,6 @@ export default class Sidebar extends React.Component {
     super(props)
   }
   render() {
-    console.log(this.props.appState)
     return (
       <div className={cx('sidebar', 'dyslexi-render')}>
         <div className={cx('list-group', 'list-group-flush')}>

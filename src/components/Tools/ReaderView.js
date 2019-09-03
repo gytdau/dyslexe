@@ -67,8 +67,6 @@ export default class ReaderView extends Tool {
   }
   componentDidMount() {
     body.appendChild(this.el)
-    console.log('Readability has received this:')
-    console.log(this.props)
     if (!this.props.article_document) {
       alert("Uh oh! It looks like we can't see this article in fullscreen.")
       return
@@ -78,8 +76,6 @@ export default class ReaderView extends Tool {
     var wrapper = document.createElement('div')
     wrapper.innerHTML = article.content
     var div = wrapper.firstChild
-    console.log('Wrapper looks like', wrapper)
-    console.log('div looks like', div)
 
     let newContent = recursivelyBuildArticleText(
       div,

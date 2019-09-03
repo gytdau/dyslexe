@@ -24,11 +24,8 @@ export default class App extends React.Component {
     this.refreshState = this.refreshState.bind(this)
   }
   setAppState(values) {
-    console.log('Chrome app state has been updated!')
-    console.log(values)
     let { appState, article_data } = this.state
     if (!this.state.appState.fullscreen && values.fullscreen) {
-      console.log('!!! Document has been cloned, entering fullscreen...')
       article_data = document.cloneNode(true)
     }
     Object.assign(appState, values)
@@ -57,7 +54,7 @@ export default class App extends React.Component {
       if (appState.fullscreen) {
         article_data = document.cloneNode(true)
       }
-      console.log('enableCount:', appState.enableCount)
+
       this.setState({
         appState,
         article_data

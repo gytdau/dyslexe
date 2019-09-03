@@ -17,7 +17,6 @@ export default class ColorPicker extends React.Component {
             color.hsv.a = color.a
             color.rgb.a = color.a
             this.props.setAppState({ [this.props.propertyName]: color })
-            console.log(JSON.stringify(color))
           }}
           width="100%"
         />

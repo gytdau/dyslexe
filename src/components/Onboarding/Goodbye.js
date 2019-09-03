@@ -58,7 +58,6 @@ export default class Goodbye extends React.Component {
       upsidedown_letters_characters,
       mix_up_letters_combinations
     } = this.props.responses
-    console.log(upsidedown_letters_characters, mix_up_letters_combinations)
     let letters = []
     if (upsidedown_letters_characters) {
       letters = letters.concat(upsidedown_letters_characters)

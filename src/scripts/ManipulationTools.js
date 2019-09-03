@@ -9,7 +9,6 @@ const bodySelector = 'body > *:not(.' + cx('dyslexi-render') + ')'
 
 // FULLSCREEN
 function zap() {
-  console.log('Zapping has occured.')
   if (bodyStorage != null) {
     return
   }

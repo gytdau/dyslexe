@@ -43,7 +43,6 @@ export default class Onboarding extends React.Component {
         break
       }
     }
-    console.log({ question, page, responses })
     this.setState({ question, page, responses, questionCount })
   }
   next() {
