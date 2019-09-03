@@ -14,12 +14,6 @@
       "128": "logo-128.png"
     }
   },
-  "permissions": [
-    "https://*/*",
-    "activeTab",
-    "storage",
-    "tabs",
-    "https://simple.wikipedia.org"
-  ],
+  "permissions": ["https://*/*", "activeTab", "storage", "tabs"],
   "web_accessible_resources": ["static/fonts/*"]
 }

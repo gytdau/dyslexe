@@ -15,6 +15,14 @@ chrome.browserAction.onClicked.addListener(function(tab) {
       chrome.tabs.insertCSS(tab.id, {
         file: '/static/css/iconography.css'
       })
+      chrome.storage.sync.get('appState', result => {
+        let appState = result.appState
+        if (!appState.enableCount) {
+          appState.enableCount = 0
+        }
+        appState.enableCount += 1
+        chrome.storage.sync.set({ appState })
+      })
     } else {
       chrome.tabs.reload(tab.id)
     }
@@ -60,12 +68,12 @@ function makeRequest(simple, text, callback) {
 
   xhr.onload = () => {
     let results = getData(JSON.parse(xhr.responseText))
-    if (results.missing == '' && simple) {
-      makeRequest(false, text, callback)
-      //callback(results)
-    } else {
-      callback(results)
-    }
+    //if (results.missing == '' && simple) {
+    //  makeRequest(false, text, callback)
+    //callback(results)
+    //} else {
+    callback(results)
+    //}
   }
 }
 chrome.runtime.onMessage.addListener(function(request, sender, callback) {

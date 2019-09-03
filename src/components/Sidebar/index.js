@@ -3,7 +3,6 @@ import ReactTooltip from 'react-tooltip'
 import cx from '../styles'
 import CloseButton from './CloseButton'
 import ColorPicker from './ColorPicker'
-import DemoNotice from './DemoNotice'
 import FontPicker from './FontPicker'
 import Group from './Group'
 import PropertySlider from './PropertySlider'
@@ -106,7 +105,6 @@ export default class Sidebar extends React.Component {
               <ColorPicker {...this.props} propertyName="backgroundTintBase" />
             </Group>
             <TestAgain {...this.props} />
-            <DemoNotice {...this.props} />
           </div>
         </div>
         <ReactTooltip />

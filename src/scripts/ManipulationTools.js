@@ -88,7 +88,10 @@ function updateReadingTheme(state) {
     if (!element.classList) {
       return
     }
-    if (element.classList.contains(cx('sidebar-container'))) {
+    if (
+      element.classList.contains(cx('sidebar-container')) ||
+      element.classList.contains(cx('sidebar-floating'))
+    ) {
       return
     }
     element

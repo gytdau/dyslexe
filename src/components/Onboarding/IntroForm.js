@@ -106,11 +106,19 @@ export default class IntroForm extends React.Component {
               </select>
             </div>
           </form>
-          <div
-            className={`btn btn-primary ${cx('btn')} ${cx('btn-primary')}`}
-            onClick={this.submit}
-          >
-            <i className="mdi mdi-check" /> Done
+          <div>
+            <div
+              className={cx('btn', 'btn-primary', 'd-inline-block')}
+              onClick={this.submit}
+            >
+              <i className="mdi mdi-check" /> Done
+            </div>
+            <div
+              className={cx('btn', 'btn-primary', 'bg-light', 'd-inline-block')}
+              onClick={this.props.respond}
+            >
+              Skip
+            </div>
           </div>
         </Bottom>
       </Container>

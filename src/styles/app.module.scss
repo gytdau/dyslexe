@@ -1,9 +1,9 @@
-@import "bootstrap";
-@import "colors";
-@import "firasans";
-@import "onboarding";
-@import "user_adjustments";
-@import "fonts";
+@import 'bootstrap';
+@import 'colors';
+@import 'firasans';
+@import 'onboarding';
+@import 'user_adjustments';
+@import 'fonts';
 
 h1,
 h2,
@@ -29,11 +29,11 @@ h6 {
   right: 0;
   height: 100%;
   background-color: white;
-  font-family: "Fira Sans";
+  font-family: 'Fira Sans';
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   width: 25em;
   & > * {
-    font-family: "Fira Sans";
+    font-family: 'Fira Sans';
   }
 }
 .sidebar-floating {
@@ -46,9 +46,9 @@ h6 {
   right: 0;
   height: 100%;
   background-color: transparent;
-  font-family: "Fira Sans";
+  font-family: 'Fira Sans';
   & > * {
-    font-family: "Fira Sans";
+    font-family: 'Fira Sans';
   }
   .btn-float {
     background: white;
@@ -92,7 +92,7 @@ h6 {
   display: flex;
   width: 100%;
   height: 100%;
-  font-family: "Fira Sans";
+  font-family: 'Fira Sans';
   flex-direction: column;
 }
 .alpha-slider-container {
@@ -130,6 +130,7 @@ h6 {
 }
 .balance-bottom {
   color: #222;
+  margin-bottom: 10em;
   > * {
     margin-top: 2.5rem;
   }
@@ -186,13 +187,22 @@ h6 {
 .definition-inner {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   border: 2px solid #e4e4e4;
-  margin: 1em;
   padding: 2em;
   max-width: 500px;
   z-index: 2147483636;
   border-radius: 10px;
-  max-height: 200px;
+  max-height: 400px;
+  pointer-events: none;
   background: white;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.definition-iframe {
+  width: 40em;
+  height: 100em;
+  &-container {
+    margin-left: -60px;
+    margin-top: -260px;
+    transform: scale(0.9);
+  }
 }

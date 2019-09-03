@@ -20,6 +20,7 @@ export default class WordDefinition extends React.Component {
         <Popover
           isOpen={true}
           position={'bottom'}
+          disableReposition={true}
           padding={0}
           {...this.props}
           content={({ position, targetRect, popoverRect }) => (
@@ -28,17 +29,19 @@ export default class WordDefinition extends React.Component {
               targetRect={targetRect}
               popoverRect={popoverRect}
               arrowSize={10}
-              arrowStyle={{ margin: '1em' }}
               arrowColor={'#e4e4e4'}
             >
               <div className={cx('definition-inner')}>
                 {this.state.definition ? (
-                  <div>
-                    {this.state.definition.missing == '' ? (
-                      <h3 className={cx('text-center')}>No definition found</h3>
-                    ) : (
-                      <p>{this.state.definition.extract}</p>
-                    )}
+                  <div className={cx('definition-iframe-container')}>
+                    <iframe
+                      src={
+                        'https://www.google.com/search?q=' +
+                        this.props.text +
+                        '&igu=1&prmd=inmv&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjn7L34tLLkAhVkSxUIHcxJAAAQ_AUoAXoECBAQAQ&biw=411&bih=731&dpr=2.63&tbs=isz%3Am%2Citp%3Aclipart'
+                      }
+                      className={cx('definition-iframe')}
+                    ></iframe>
                   </div>
                 ) : (
                   <BeatLoader />

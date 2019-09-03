@@ -42,20 +42,27 @@ export default class App extends React.Component {
         let appState = {
           step: 'onboarding',
           textSize: 1,
-          lineHeight: 1
+          lineHeight: 1,
+          outroFormSeen: false
         }
         result.appState = appState
         chrome.storage.sync.set({ appState })
       }
       let { article_data } = this.state
-      if (result.appState.fullscreen) {
+      let { appState } = result
+      if (!appState.outroFormSeen && appState.enableCount >= 10) {
+        appState.step = 'outroForm'
+        appState.fullscreen = true
+      }
+      if (appState.fullscreen) {
         article_data = document.cloneNode(true)
       }
+      console.log('enableCount:', appState.enableCount)
       this.setState({
-        appState: result.appState,
+        appState,
         article_data
       })
-      ManipulationTools.updateReadingTheme(result.appState)
+      ManipulationTools.updateReadingTheme(appState)
     })
   }
   render() {

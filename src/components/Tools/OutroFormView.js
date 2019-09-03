@@ -11,11 +11,20 @@ export default class OutroFormView extends Tool {
     this.state = {}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.submit = this.submit.bind(this)
+    this.dismiss = this.dismiss.bind(this)
   }
   render() {
     let content = (
       <div>
-        <h1>Have a minute?</h1>
+        <h1>
+          Have a minute?{' '}
+          <div
+            className={cx('btn', 'btn-light', 'float-right')}
+            onClick={this.dismiss}
+          >
+            <i className="mdi mdi-close" />
+          </div>
+        </h1>
         <p>
           We're glad to see you've been using Dyslex.ie for the past few days.
           If you have the time, answer these quick questions to help us make
@@ -89,11 +98,14 @@ export default class OutroFormView extends Tool {
       [name]: value
     })
   }
+  dismiss() {
+    this.props.setAppState({ step: 'article', outroFormSeen: true })
+  }
   submit() {
     axios
       .post('https://dyslexie-7ab5a.firebaseio.com/outro.json', this.state)
       .then(() => {
-        this.props.setAppState({ step: 'article' })
+        this.dismiss()
       })
   }
 }
