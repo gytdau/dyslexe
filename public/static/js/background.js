@@ -34,13 +34,17 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     console.log('Tab finished loading.')
     chrome.storage.sync.get('enabled', result => {
       if (result.enabled) {
-        console.log('Enabled, auto-inserting.')
-        chrome.tabs.executeScript(tab.id, { file: 'static/js/content.js' })
-        chrome.tabs.insertCSS(tab.id, {
-          file: '/static/css/content.css'
-        })
-        chrome.tabs.insertCSS(tab.id, {
-          file: '/static/css/iconography.css'
+        chrome.tabs.sendMessage(tabId, { greeting: 'hello' }, response => {
+          if (!response) {
+            console.log('Enabled, auto-inserting.')
+            chrome.tabs.executeScript(tab.id, { file: 'static/js/content.js' })
+            chrome.tabs.insertCSS(tab.id, {
+              file: '/static/css/content.css'
+            })
+            chrome.tabs.insertCSS(tab.id, {
+              file: '/static/css/iconography.css'
+            })
+          }
         })
       }
     })
