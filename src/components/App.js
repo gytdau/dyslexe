@@ -12,7 +12,6 @@ import ColorTint from './Tools/ColorTint'
 import TextStyle from './Tools/TextStyle'
 import LineFocus from './Tools/LineFocus'
 import OutroFormView from './Tools/OutroFormView'
-import Editor from './Editor'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -85,34 +84,6 @@ export default class App extends React.Component {
             <Onboarding setAppState={this.setAppState} />
           </div>
         )
-        break
-      case 'editor':
-        if (this.state.appState.sidebar) {
-          content = (
-            <Sidebar
-              setAppState={this.setAppState}
-              appState={this.state.appState}
-            />
-          )
-        } else {
-          content = (
-            <ClosedSidebar
-              setAppState={this.setAppState}
-              appState={this.state.appState}
-            />
-          )
-        }
-        if (this.state.appState.fullscreen) {
-          content = (
-            <>
-              <Editor
-                setAppState={this.setAppState}
-                appState={this.state.appState}
-              />
-              {content}
-            </>
-          )
-        }
         break
       case 'article':
         if (this.state.appState.sidebar) {

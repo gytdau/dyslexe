@@ -66,7 +66,7 @@ function removeAllBodyClasses() {
     .classList.remove(cx('sidebar-container'), cx('sidebar-floating'))
 }
 function addBodyClasses(state) {
-  if (state.step != 'article' && state.step != 'editor') {
+  if (state.step != 'article') {
     return
   }
   let container = document.getElementsByClassName(cx('inserted-content'))[0]
