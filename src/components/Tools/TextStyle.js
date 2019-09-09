@@ -1,23 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import cx from '../styles'
+import Tool from './Tool'
 
-const body = document.getElementsByTagName('body')[0]
-
-export default class TextStyle extends React.Component {
-  constructor(props) {
-    super(props)
-    this.el = document.createElement('div')
-    this.el.className += ' ' + cx('dyslexi-render')
-  }
-
-  componentDidMount() {
-    body.appendChild(this.el)
-  }
-
-  componentWillUnmount() {
-    body.removeChild(this.el)
-  }
+export default class TextStyle extends Tool {
   generateStyle() {
     const fontSizes = ['8pt', '12pt', '14pt', '18pt', '20pt']
     const lineHeights = [1.5, 2, 2.5, 3, 3.5]

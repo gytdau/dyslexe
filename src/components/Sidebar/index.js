@@ -7,6 +7,7 @@ import FontPicker from './FontPicker'
 import Group from './Group'
 import PropertySlider from './PropertySlider'
 import TestAgain from './TestAgain'
+import DocumentEditor from './DocumentEditor'
 
 export default class Sidebar extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class Sidebar extends React.Component {
         </div>
         <div className={cx('sidebar-content')}>
           <div className={cx('list-group', 'list-group-flush')}>
+            <DocumentEditor {...this.props} />
             <Group
               label="Text enhancements"
               help="Change how big the text is or how spaced apart it is."

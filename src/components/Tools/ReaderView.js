@@ -1,14 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Readability from '../../readability'
-import cx from '../styles'
 import '../../styles/readerview.scss'
+import cx from '../styles'
 import ReaderViewUnloadable from './ReaderViewUnloadable'
-import Tool from './Tool'
 import recursivelyBuildArticleText from './Syllables'
-import ReactTooltip from 'react-tooltip'
-
-const body = document.getElementsByTagName('body')[0]
+import Tool from './Tool'
 
 export default class ReaderView extends Tool {
   constructor(props) {
@@ -66,7 +63,7 @@ export default class ReaderView extends Tool {
     )
   }
   componentDidMount() {
-    body.appendChild(this.el)
+    this.body.appendChild(this.el)
     if (!this.props.article_document) {
       alert("Uh oh! It looks like we can't see this article in fullscreen.")
       return

@@ -66,7 +66,7 @@ function removeAllBodyClasses() {
     .classList.remove(cx('sidebar-container'), cx('sidebar-floating'))
 }
 function addBodyClasses(state) {
-  if (state.step != 'article') {
+  if (state.step != 'article' && state.step != 'editor') {
     return
   }
   let container = document.getElementsByClassName(cx('inserted-content'))[0]
@@ -82,7 +82,16 @@ function updateReadingTheme(state) {
   addBodyClasses(state)
   detectFullscreen(state)
   let body = document.getElementsByTagName('body')[0]
-  var els = Array.from(body.childNodes)
+  if (window.location.host == 'docs.google.com') {
+    body = document.querySelectorAll('.kix-appview-editor')[0]
+  }
+  addTextTokenTags(body)
+  if (window.location.host == 'docs.google.com') {
+    attachObserver()
+  }
+}
+function addTextTokenTags(target) {
+  var els = Array.from(target.childNodes)
   els.forEach(element => {
     if (!element.classList) {
       return
@@ -97,5 +106,32 @@ function updateReadingTheme(state) {
       .querySelectorAll('*')
       .forEach(element2 => element2.classList.add(cx('text-token')))
   })
+}
+function attachObserver() {
+  //call mutation observer api
+  var MutationObserver =
+    window.MutationObserver || window.WebKitMutationObserver
+
+  var target = document.querySelectorAll('.kix-appview-editor')[0]
+  // create an observer instance
+  var config = { attributes: true, subtree: true }
+  let handleMutation = mutations => {
+    console.log('Mutations observed!')
+    //observer.disconnect()
+    //addTextTokenTags(target)
+    //var observer = new MutationObserver(handleMutation)
+    //observer.observe(target, config)
+
+    /* Other code
+    mutations.forEach((mutation) => {
+      const el = mutation.target;
+      if ((!mutation.oldValue || !mutation.oldValue.match(/\bis-busy\b/)) 
+        && mutation.target.classList 
+        && mutation.target.classList.contains('is-busy')){
+        alert('is-busy class added');
+      }
+    });*/
+  }
+  //var observer = new MutationObserver(handleMutation)
 }
 export { removeAllBodyClasses, addBodyClasses, updateReadingTheme }

@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import cx from '../styles'
 import Tool from './Tool'
 
-const body = document.getElementsByTagName('body')[0]
-
 export default class LineFocus extends Tool {
   constructor(props) {
     super(props)

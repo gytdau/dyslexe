@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import cx from '../styles'
 import Tool from './Tool'
 
-const body = document.getElementsByTagName('body')[0]
-
 export default class ColorTint extends Tool {
   render() {
     if (!this.props.appState.colorTint && !this.props.appState.backgroundTint) {
