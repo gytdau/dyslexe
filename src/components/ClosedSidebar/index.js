@@ -13,18 +13,16 @@ export default class ClosedSidebar extends React.Component {
           icon="settings"
           onClick={() => this.props.setAppState({ sidebar: true })}
         />
-        {window.location.host == 'docs.google.com' ? null : (
-          <FloatingButton
-            icon={
-              this.props.appState.fullscreen ? 'fullscreen-exit' : 'fullscreen'
-            }
-            onClick={() =>
-              this.props.setAppState({
-                fullscreen: !this.props.appState.fullscreen
-              })
-            }
-          />
-        )}
+        <FloatingButton
+          icon={
+            this.props.appState.fullscreen ? 'fullscreen-exit' : 'fullscreen'
+          }
+          onClick={() =>
+            this.props.setAppState({
+              fullscreen: !this.props.appState.fullscreen
+            })
+          }
+        />
         <FloatingButton
           icon={'close'}
           onClick={() => {

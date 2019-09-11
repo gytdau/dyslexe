@@ -47,9 +47,6 @@ export default class App extends React.Component {
       }
       let { article_data } = this.state
       let { appState } = result
-      if (window.location.host == 'docs.google.com') {
-        appState.fullscreen = false
-      }
       if (!appState.outroFormSeen && appState.enableCount >= 10) {
         appState.step = 'outroForm'
         appState.fullscreen = true
