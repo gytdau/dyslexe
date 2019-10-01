@@ -48,6 +48,12 @@ export default class Sidebar extends React.Component {
               />
             </Group>
             <Group
+              label="Boxes around paragraphs"
+              help="Show a box around each paragraph."
+              {...this.props}
+              switch="paragraphBorder"
+            ></Group>
+            <Group
               help="Change the font the text is shown in."
               label="Font"
               {...this.props}
@@ -69,6 +75,29 @@ export default class Sidebar extends React.Component {
                   <span>
                     <i className="mdi mdi-arrow-split-horizontal" /> Size of
                     clear area
+                  </span>
+                }
+              />
+            </Group>
+            <Group
+              help="Make the line length bigger or smaller on full screen."
+              label="Change words per line"
+              {...this.props}
+              switch="changeLineLength"
+            >
+              {this.props.appState.fullscreen ? null : (
+                <span className={cx('text-muted')}>
+                  Turn on full screen mode to use this feature.
+                </span>
+              )}
+              <PropertySlider
+                valueName="changeLineLengthWidth"
+                value={this.props.appState.changeLineLengthWidth}
+                setAppState={this.props.setAppState}
+                label={
+                  <span>
+                    <i className="mdi mdi-arrow-expand-horizontal" /> Size of
+                    line
                   </span>
                 }
               />

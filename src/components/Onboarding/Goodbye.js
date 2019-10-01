@@ -50,7 +50,10 @@ export default class Goodbye extends React.Component {
       backgroundTint: false,
       colorTint: true,
       lineFocus: false,
-      lineFocusHeight: 1
+      lineFocusHeight: 1,
+      changeLineLengthWidth: 1,
+      changeLineLength: false,
+      paragraphBorder: false
     }
   }
   componentDidMount() {
