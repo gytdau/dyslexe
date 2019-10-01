@@ -75,7 +75,7 @@ class Draggable extends React.PureComponent {
   _ref = React.createRef()
 
   _onMouseMove = event => {
-    this.props.onMove(event.pageX - this._relX, event.pageY - this._relY)
+    this.props.onMove(event.clientX - this._relX, event.clientY - this._relY)
     event.preventDefault()
   }
 
@@ -83,7 +83,7 @@ class Draggable extends React.PureComponent {
     const { x, y } = this.props
     this._ref.current.style.top = `${y}px`
     this._ref.current.style.left = `${x}px`
-    this._ref.current.style.position = 'absolute'
+    this._ref.current.style.position = 'fixed'
   })
 
   componentDidMount() {
