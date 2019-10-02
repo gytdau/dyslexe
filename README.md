@@ -1,6 +1,10 @@
-# Dyslexi
+# Dyslex-E
 
 This extension makes reading articles easier for those who have dyslexia or other reading ailments. It's estimated that 1 in 10 people are dyslexic. If we make reading even slightly easier, it's a win in our book.
+
+# How to access
+
+You can learn more about Dyslex-E by [visiting our homepage](https://dyslex.ie).
 
 # Contributing
 
